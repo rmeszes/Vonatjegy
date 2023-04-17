@@ -103,12 +103,16 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Lista.cpp" />
     <ClCompile Include="memtrace.cpp" />
+    <ClCompile Include="Vonat.cpp" />
     <ClCompile Include="vonatjegy_main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gtest_lite.h" />
+    <ClInclude Include="Lista.h" />
     <ClInclude Include="memtrace.h" />
+    <ClInclude Include="Vonat.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
