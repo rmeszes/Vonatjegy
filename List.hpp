@@ -5,7 +5,7 @@ template<class T> class List
 	struct ListElement {
 		T data;
 		ListElement* next;
-		ListElement(ListElement *p = nullptr) :next(p) {}
+		ListElement(ListElement* p = nullptr) :next(p) {}
 	};
 	ListElement* start, * current;
 public:
@@ -16,7 +16,15 @@ public:
 		p->next = new ListElement;
 		p->next->data = data;
 	}
-	//bool Next(const T&);
+	bool Next(T& data) {
+		if (current->next == nullptr) {
+			current = start;
+			return false;
+		}
+		data = current->data;
+		current = current->next;
+		return true;
+	}
 	~List()
 	{
 		ListElement* p = start;
@@ -28,7 +36,7 @@ public:
 		start = nullptr;
 		current = nullptr;
 	}
-	T getCurrent() {
+	T getCurrent() const {
 		return current->data;
 	}
 };

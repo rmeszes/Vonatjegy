@@ -103,14 +103,13 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="List.cpp" />
     <ClCompile Include="memtrace.cpp" />
     <ClCompile Include="Vonat.cpp" />
     <ClCompile Include="vonatjegy_main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gtest_lite.h" />
-    <ClInclude Include="List.h" />
+    <ClInclude Include="List.hpp" />
     <ClInclude Include="memtrace.h" />
     <ClInclude Include="Vonat.h" />
   </ItemGroup>
