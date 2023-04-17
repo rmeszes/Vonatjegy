@@ -98,6 +98,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="memtrace.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="gtest_lite.h" />
+    <ClInclude Include="memtrace.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
