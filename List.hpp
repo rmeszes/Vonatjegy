@@ -33,7 +33,6 @@ public:
         return true;
     }
     ~List() {
-        std::cout << "List dtor\n" << std::flush;
         ListElement* p = start;
         while (p != nullptr) {
             ListElement* temp = p;
@@ -46,7 +45,17 @@ public:
     T getCurrent() const {
         return current->data;
     }
-    T& operator[](size_t i) { //indexelõ op., írhatóan adja vissza az adat pointerét
+    T& operator[](const size_t i) { //indexelõ op., írhatóan adja vissza az adat pointerét
+        ListElement* p = start;
+        for (size_t j = 0; j < i; j++) {
+            p = p->next;
+            if (p == nullptr) {
+                throw std::out_of_range("List_out_of_bound"); //TODO catch, teszt
+            }
+        }
+        return p->data;
+    }
+    const T operator[](const size_t i) const { //indexelõ op., const esetén
         ListElement* p = start;
         for (size_t j = 0; j < i; j++) {
             p = p->next;

@@ -24,8 +24,12 @@ int main() {
 	} ENDM
 
 	TEST(vonat, ctor) {
-		Vonat v(1000, 1, 1);
-		EXPECT_EQ(1000, v.getVonatSzam());
+		ASSERT_NO_THROW(Vonat v(1000, 2, 3));
+	} ENDM
+
+	TEST(vonat_ertekek, getters) {
+		Vonat v(1001, 4, 100);
+		EXPECT_EQ(1001, v.getVonatSzam());
 	} ENDM
 
 	std::cout << "\nA kód lefutott, Enter a bezáráshoz";

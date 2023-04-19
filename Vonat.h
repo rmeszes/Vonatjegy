@@ -2,41 +2,52 @@
 #define VONAT_H
 
 #include "List.hpp"
+#include "string.h"
+
+class Kocsi {
+	unsigned int kocsi_szam; 
+	size_t helyek;
+public:
+	Kocsi(unsigned int kocsi_szam, size_t helyek_szama) :kocsi_szam(kocsi_szam), helyek(helyek_szama) {}
+	unsigned int getKocsiSzam() const { return kocsi_szam; }
+	size_t getHelyekSzama() const { return helyek; }
+};
 
 class Vonat {
-public:
-	struct Hely {
-		int helySzam;
-		bool foglalt;
-		Hely(int helySzam) :helySzam(helySzam), foglalt(false) {}
-		~Hely() {}
-	};
-
-	class Kocsi {
-		List<Hely> helyek;
-		int kocsiSzam;
-	public:
-		Kocsi(int kocsiSzam, int helyekSzama) :kocsiSzam(kocsiSzam) {
-			for (int i = 0; i < helyekSzama; i++) {
-				helyek.Add(Hely(i + 1));
-			}
-		}
-
-		const List<Hely>& getHelyek() const { return helyek; }
-		int getKocsiSzam() const { return kocsiSzam; }
-	}; //kocsi vége
-
-private: // Vonat
+	unsigned int vonat_szam;
 	List<Kocsi> kocsik;
-	int vonatSzam;
 public:
-	Vonat(int vonatSzam, int kocsikSzama, int hely_per_kocsi) :vonatSzam(vonatSzam) {
-		for (int i = 0; i < kocsikSzama; i++)
+	Vonat(unsigned int vonat_szam, size_t kocsik_szama, size_t helyek_szama) :vonat_szam(vonat_szam) {
+		for (size_t i = 0; i < kocsik_szama; i++)
 		{
-			kocsik.Add(Kocsi(i + 1, hely_per_kocsi));
+			kocsik.Add(Kocsi(100 + i, helyek_szama));
 		}
 	}
-	const List<Kocsi>& getKocsik() const { return kocsik; }
-	int getVonatSzam() const { return vonatSzam; }
+	unsigned int getVonatSzam() const { return vonat_szam; }
 };
+
+
+///  Még csak ötlet, lehet kidobom
+/*class Jegy {
+	int kocsi_szam; //csak a kiíráshoz kell
+	int hely_szam;
+};
+
+class Vonal {
+	Vonat* vonat;
+	List<Jegy> jegyek;
+	
+	unsigned int indulasi_ido; //Esetleg egy idõt kezelõ class
+	unsigned int erkezesi_ido;
+
+	String indulasi_allomas;
+	String erkezesi_allomas;
+};
+
+class Tarsasag {
+	List<String> allomasok;
+	List<std::unique_ptr<Vonat>> vonatok;
+	List<Vonal> vonalak;
+};*/
+
 #endif // !VONAT_H

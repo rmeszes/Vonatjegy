@@ -104,6 +104,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="memtrace.cpp" />
+    <ClCompile Include="string.cpp" />
     <ClCompile Include="Vonat.cpp" />
     <ClCompile Include="vonatjegy_test.cpp" />
   </ItemGroup>
@@ -111,6 +112,7 @@
     <ClInclude Include="gtest_lite.h" />
     <ClInclude Include="List.hpp" />
     <ClInclude Include="memtrace.h" />
+    <ClInclude Include="string.h" />
     <ClInclude Include="Vonat.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
