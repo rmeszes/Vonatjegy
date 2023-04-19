@@ -105,7 +105,7 @@
   <ItemGroup>
     <ClCompile Include="memtrace.cpp" />
     <ClCompile Include="Vonat.cpp" />
-    <ClCompile Include="vonatjegy_main.cpp" />
+    <ClCompile Include="vonatjegy_test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gtest_lite.h" />

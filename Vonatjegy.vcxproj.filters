@@ -21,7 +21,7 @@
     <ClCompile Include="Vonat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="vonatjegy_main.cpp">
+    <ClCompile Include="vonatjegy_test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
