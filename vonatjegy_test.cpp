@@ -13,6 +13,21 @@ int main() {
 	SetConsoleOutputCP(1250);
 #endif
 
+	TEST(lista, ctor) {
+		ASSERT_NO_THROW(List<size_t> lista);
+	} ENDM
+
+	TEST(list_add, hozzaadas) {
+		List<size_t> lista;
+		lista.Add(1);
+		EXPECT_EQ(1, lista[0]);
+	} ENDM
+
+	TEST(vonat, ctor) {
+		Vonat v(1000, 2, 2);
+		EXPECT_EQ(100, v.kocsikSzama());
+	} ENDM
+
 	std::cout << "\nA kód lefutott, Enter a bezáráshoz";
 	std::cin.get();
 	return 0;
