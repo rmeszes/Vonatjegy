@@ -25,7 +25,7 @@ int main() {
 
 	TEST(vonat, ctor) {
 		Vonat v(1000, 2, 2);
-		EXPECT_EQ(100, v.kocsikSzama());
+		EXPECT_EQ(1000, v.getVonatSzam());
 	} ENDM
 
 	std::cout << "\nA kód lefutott, Enter a bezáráshoz";

@@ -3,30 +3,39 @@
 
 #include "List.hpp"
 
-class Vonat
-{
-	int vonatSzam;
-	size_t kocsik_szama;
-	size_t ulesek_per_kocsi;
-	struct Kocsi {
-		int kocsiSzam;
-		struct Ules {
-			int ulesSzam;
-			bool foglalt = false;
-		public:
-			Ules(int ulesSzam = 0) :ulesSzam(ulesSzam) {}
-		};
-		List<Ules> ulesek;
-	public:
-		Kocsi(size_t ulesek_szama,int kocsiSzam = 0);
-	};
-	List<Kocsi> kocsik;
+class Vonat {
 public:
-	Vonat(int vonatSzam, size_t kocsik_szama, size_t ules_per_kocsi);
+	struct Hely {
+		int helySzam;
+		bool foglalt;
+		Hely(int helySzam) :helySzam(helySzam), foglalt(false) {}
+	};
 
-	size_t kocsikSzama() const { return kocsik_szama; }
-	size_t ulesek() const { return ulesek_per_kocsi; }
+	class Kocsi {
+		List<Hely> helyek;
+		int kocsiSzam;
+	public:
+		Kocsi(int kocsiSzam, int helyekSzama) :kocsiSzam(kocsiSzam) {
+			for (int i = 0; i < helyekSzama; i++) {
+				helyek.Add(Hely(i + 1));
+			}
+		}
 
-	int kocsiSzamAt(size_t i);
+		const List<Hely>& getHelyek() const { return helyek; }
+		int getKocsiSzam() const { return kocsiSzam; }
+	}; //kocsi vége
+
+private: // Vonat
+	List<Kocsi> kocsik;
+	int vonatSzam;
+public:
+	Vonat(int vonatSzam, int kocsikSzama, int hely_per_kocsi) :vonatSzam(vonatSzam) {
+		for (int i = 0; i < kocsikSzama; i++)
+		{
+			kocsik.Add(Kocsi(i + 1, hely_per_kocsi));
+		}
+	}
+	const List<Kocsi>& getKocsik() const { return kocsik; }
+	int getVonatSzam() const { return vonatSzam; }
 };
 #endif // !VONAT_H

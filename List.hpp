@@ -13,13 +13,13 @@ public:
     List() :start(nullptr), current(nullptr) {}
     List(const T& data) : start(new ListElement(data)), current(start) {}
     void Add(const T& data) {
-        ListElement* newElement = new ListElement(data);
         if (start == nullptr) {
-            start = current = newElement;
+            start = current = new ListElement(data);
         }
         else {
-            current->next = newElement;
-            current = newElement;
+            ListElement* p;
+            for (p = start; p->next != nullptr; p = p->next);
+            p->next = new ListElement(data);
         }
     }
     bool Next(T& data) {
