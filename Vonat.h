@@ -9,6 +9,7 @@ public:
 		int helySzam;
 		bool foglalt;
 		Hely(int helySzam) :helySzam(helySzam), foglalt(false) {}
+		~Hely() {}
 	};
 
 	class Kocsi {

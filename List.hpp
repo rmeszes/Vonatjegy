@@ -1,6 +1,7 @@
 #ifndef LIST_H
 #define LIST_H
 #include <stdexcept>
+#include <iostream>
 template<class T> class List
 {
 	struct ListElement {
@@ -32,6 +33,7 @@ public:
         return true;
     }
     ~List() {
+        std::cout << "List dtor\n" << std::flush;
         ListElement* p = start;
         while (p != nullptr) {
             ListElement* temp = p;

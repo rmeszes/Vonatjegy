@@ -24,7 +24,7 @@ int main() {
 	} ENDM
 
 	TEST(vonat, ctor) {
-		Vonat v(1000, 2, 2);
+		Vonat v(1000, 1, 1);
 		EXPECT_EQ(1000, v.getVonatSzam());
 	} ENDM
 
