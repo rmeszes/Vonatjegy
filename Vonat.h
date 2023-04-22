@@ -3,6 +3,7 @@
 
 #include "List.hpp"
 #include "string.h"
+#include "Ido.h"
 
 class Kocsi {
 	unsigned int kocsi_szam; 

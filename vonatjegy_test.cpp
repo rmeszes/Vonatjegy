@@ -6,6 +6,8 @@
 
 #include "Vonat.h"
 #include "List.hpp"
+#include "Ido.h"
+
 int main() {
 	//A windowsban a megfelelõ megjelenítéshez
 #if defined(WIN32) || defined(_WIN32) || defined(WIN64) || defined(_WIN64)
@@ -33,7 +35,7 @@ int main() {
 	} ENDM
 
 	TEST(hely, foglalas) {
-		Vonat v(1002, 2, 2);
+		Vonat v(1002, 3, 2);
 		unsigned int hely[2];
 		v.findSeat(hely);
 		EXPECT_EQ(100, hely[0]);
