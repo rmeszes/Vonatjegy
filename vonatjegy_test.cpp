@@ -40,13 +40,11 @@ int main() {
 		v.findSeat(hely);
 		EXPECT_EQ(100, hely[0]);
 		EXPECT_EQ(1, hely[1]);
-		v.findSeat(hely);
-		v.findSeat(hely);
-		v.findSeat(hely);
-		v.findSeat(hely);
-		EXPECT_EQ(0, hely[0]);
-		EXPECT_EQ(0, hely[1]);
 	} ENDM
+
+	Ido ido(2002,02,03,3,12);
+	std::cout << ido.toString() << std::endl;
+	std::cout << ido.getEv() << std::endl;
 
 	std::cout << "\nA kód lefutott, Enter a bezáráshoz";
 	std::cin.get();

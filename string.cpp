@@ -42,6 +42,27 @@ String::String(const String& s) :len(s.len){
     strcpy(pData, s.pData);
 }
 
+//ctor int-ből
+String::String(const int i)
+{
+    len = 0;
+    int temp = i;
+    while (temp != 0) {
+        temp /= 10;
+        len++;
+    }
+
+    pData = new char[len + 1];
+    pData[len] = '\0';
+
+    int szam = i;
+
+    for (int j = len - 1; j >= 0; j--) {
+        pData[j] = '0' + (szam % 10);
+        szam /= 10;
+    }
+}
+
 /// Destruktor (disposeString)
 String::~String() {
     delete[] pData;

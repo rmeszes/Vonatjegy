@@ -44,6 +44,8 @@ public:
 
     String(const String&);
 
+    explicit String(const int);
+
     String& operator=(const String);
 
     char& operator[](size_t idx) const;
