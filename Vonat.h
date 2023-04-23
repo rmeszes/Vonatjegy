@@ -50,6 +50,8 @@ public:
 		}
 	}
 
+	Vonat(const Vonat& v) :vonat_szam(v.vonat_szam), kocsik(v.kocsik), kocsik_szama(v.kocsik_szama) {}
+
 	unsigned int getVonatSzam() const { return vonat_szam; }
 
 	void findSeat(unsigned int* ret);

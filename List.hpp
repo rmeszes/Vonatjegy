@@ -13,6 +13,7 @@ template<class T> class List
 public:
     List() :start(nullptr), current(nullptr) {}
     List(const T& data) : start(new ListElement(data)), current(start) {}
+
     void Add(const T& data) {
         if (start == nullptr) {
             start = current = new ListElement(data);
@@ -23,6 +24,15 @@ public:
             p->next = new ListElement(data);
         }
     }
+
+    List(const List& l) {
+        ListElement* p = l.start;
+        while (p != nullptr) {
+            Add(p->data);
+            p = p->next;
+        }
+    }
+
     bool Next(T& data) {
         if (current->next == nullptr) {
             current = start;
