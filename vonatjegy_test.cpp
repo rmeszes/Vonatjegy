@@ -42,9 +42,8 @@ int main() {
 		EXPECT_EQ(1, hely[1]);
 	} ENDM
 
-	Ido ido(2002,02,03,3,12);
-	std::cout << ido.toString() << std::endl;
-	std::cout << ido.getEv() << std::endl;
+	List<Vonat> lista;
+	lista.Add(Vonat(1000, 10, 60));
 
 	std::cout << "\nA kód lefutott, Enter a bezáráshoz";
 	std::cin.get();

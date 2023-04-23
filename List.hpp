@@ -12,7 +12,6 @@ template<class T> class List
 	ListElement* start, * current;
 public:
     List() :start(nullptr), current(nullptr) {}
-    List(const T& data) : start(new ListElement(data)), current(start) {}
 
     void Add(const T& data) {
         if (start == nullptr) {
@@ -25,7 +24,7 @@ public:
         }
     }
 
-    List(const List& l) {
+    List(const List& l) :List() {
         ListElement* p = l.start;
         while (p != nullptr) {
             Add(p->data);

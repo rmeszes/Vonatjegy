@@ -43,7 +43,7 @@ class Vonat {
 	List<Kocsi> kocsik;
 	size_t kocsik_szama;
 public:
-	Vonat(unsigned int vonat_szam, size_t kocsik_szama, size_t helyek_szama) :vonat_szam(vonat_szam), kocsik_szama(kocsik_szama) {
+	Vonat(unsigned int vonat_szam, size_t kocsik_szama, size_t helyek_szama) :vonat_szam(vonat_szam), kocsik_szama(kocsik_szama), kocsik() {
 		for (size_t i = 0; i < kocsik_szama; i++) //elkészítjük a kocsikat
 		{
 			kocsik.Add(Kocsi(100 + i, helyek_szama));
@@ -55,6 +55,8 @@ public:
 	unsigned int getVonatSzam() const { return vonat_szam; }
 
 	void findSeat(unsigned int* ret);
+
+	~Vonat() {}
 };
 
 
