@@ -54,28 +54,4 @@ public:
 	void findSeat(unsigned int* ret);
 };
 
-
-///  Még csak ötlet, lehet kidobom
-/*class Jegy {
-	int kocsi_szam; //csak a kiíráshoz kell
-	int hely_szam;
-};
-
-class Vonal {
-	Vonat* vonat;
-	List<Jegy> jegyek;
-	
-	unsigned int indulasi_ido; //Esetleg egy idõt kezelõ class
-	unsigned int erkezesi_ido;
-
-	String indulasi_allomas;
-	String erkezesi_allomas;
-};
-
-class Tarsasag {
-	List<String> allomasok;
-	List<std::unique_ptr<Vonat>> vonatok;
-	List<Vonal> vonalak;
-};*/
-
 #endif // !VONAT_H

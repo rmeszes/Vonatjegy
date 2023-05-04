@@ -17,7 +17,7 @@ Kocsi& Kocsi::operator=(const Kocsi& k)
 /// <summary>
 /// Kér egy helyet a kocsiban
 /// </summary>
-/// <returns>Visszatér a foglalt hely számával, vagy 0-val, ha nincs hely</returns>
+/// <returns>A foglalt hely száma, vagy 0, ha nincs hely</returns>
 unsigned int Kocsi::getHely() const
 {
 	for (size_t i = 0; i < helyek_szama; i++)
