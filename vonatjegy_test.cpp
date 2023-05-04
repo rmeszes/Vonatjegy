@@ -45,8 +45,6 @@ int main() {
 	List<Vonat> lista;
 	lista.Add(Vonat(1000, 10, 60));
 
-	int* p = new int; //nagyon szép leak
-
 
 	std::cout << "\nA kód lefutott, Enter a bezáráshoz";
 	std::cin.get();
