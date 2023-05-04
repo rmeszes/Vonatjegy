@@ -1,7 +1,6 @@
 #include <iostream>
 #include <Windows.h>
 
-#define MEMTRACE
 #include "memtrace.h"
 #include "gtest_lite.h"
 
