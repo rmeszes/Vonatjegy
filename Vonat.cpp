@@ -1,6 +1,6 @@
 #include "Vonat.h"
 
-//Értékadó op.
+
 Kocsi& Kocsi::operator=(const Kocsi& k)
 {
 	kocsi_szam = k.kocsi_szam;
