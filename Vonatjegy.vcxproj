@@ -110,7 +110,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gtest_lite.h" />
-    <ClInclude Include="Ido.h" />
     <ClInclude Include="List.hpp" />
     <ClInclude Include="memtrace.h" />
     <ClInclude Include="string.h" />

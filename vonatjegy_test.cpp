@@ -1,12 +1,13 @@
 #include <iostream>
 #include <Windows.h>
 
-#include "gtest_lite.h"
+#define MEMTRACE
 #include "memtrace.h"
+#include "gtest_lite.h"
+
 
 #include "Vonat.h"
 #include "List.hpp"
-#include "Ido.h"
 
 int main() {
 	//A windowsban a megfelelõ megjelenítéshez
