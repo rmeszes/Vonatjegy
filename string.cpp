@@ -7,7 +7,6 @@
 #include <cstring>              // Sztringműveletekhez
 #include <cstddef>
 
-//#include "memtrace.h"           // a standard headerek után kell lennie
 #include "string.h"
 
 size_t String::size() const { return len; }
