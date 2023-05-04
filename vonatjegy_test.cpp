@@ -1,7 +1,7 @@
 #include <iostream>
 #include <Windows.h>
 
-#include "memtrace.h"
+//#include "memtrace.h"
 #include "gtest_lite.h"
 
 
