@@ -5,53 +5,35 @@
 #include "string.h"
 
 class Kocsi {
-	unsigned int kocsi_szam; 
-	bool* helyek;
-	size_t helyek_szama;
 public:
-	Kocsi(unsigned int kocsi_szam = 0, size_t helyek_szama = 0) :kocsi_szam(kocsi_szam), helyek_szama(helyek_szama) {
-		if (helyek_szama == 0) { helyek = nullptr; }
-		else { helyek = new bool[helyek_szama]; }
-		for (size_t i = 0; i < helyek_szama; i++) //inicializálom a tömb elemeit, hogy biztosan false legyen
-		{
-			helyek[i] = false;
-		}
-	}
+	Kocsi(int kocsi_szam = 0, size_t helyek_szama = 0) {}
+	Kocsi(const Kocsi& k) :Kocsi() {}
 
-	Kocsi(const Kocsi& k) :kocsi_szam(k.kocsi_szam), helyek_szama(k.helyek_szama) {
-		helyek = new bool[helyek_szama];
-		for (size_t i = 0; i < helyek_szama; i++)
-		{
-			this->helyek[i] = k.helyek[i];
-		}
-	}
+	Kocsi& operator=(const Kocsi& k) { return *this; }
 
-	Kocsi& operator=(const Kocsi& k);
+	int getKocsiSzam() const { return 100; }
+	int getHely() const { return 60; }
 
-	~Kocsi() { delete[] helyek; }
-
-	unsigned int getKocsiSzam() const { return kocsi_szam; }
-
-	unsigned int getHely() const;
-
-	bool* getHelyek() const { return helyek; }
+	~Kocsi() {}
 };
 
 class Vonat {
-	unsigned int vonat_szam;
-	List<Kocsi> kocsik;
-	size_t kocsik_szama;
 public:
-	Vonat(unsigned int vonat_szam, size_t kocsik_szama, size_t helyek_szama) :vonat_szam(vonat_szam), kocsik_szama(kocsik_szama) {
-		for (size_t i = 0; i < kocsik_szama; i++) //elkészítjük a kocsikat
-		{
-			kocsik.Add(Kocsi(100 + i, helyek_szama));
-		}
-	}
+	Vonat(int vonat_szam, size_t kocsik_szama, size_t helyek_szama, String ind, String erk, String indido, String erkido, int ar) {}
 
-	unsigned int getVonatSzam() const { return vonat_szam; }
+	int getVonatSzam() const { return 1000; }
+	String getIndAll() const { return "indulási állomás"; }
+	String getErkAll() const { return "érkezési állomás"; }
+	String getIndIdo() const { return "12:00"; }
+	String getErkIdo() const { return "13:00"; }
+	int getAr() const { return 1000; }
 
-	void findSeat(unsigned int* ret);
+	void findSeat(int* ret) {}
 };
 
+
+class Tarsasag {
+public:
+	void addVonat(int vonat_szam, size_t kocsik_szama, size_t helyek_szama, String ind, String erk, String indido, String erkido, int ar) {}
+};
 #endif // !VONAT_H
