@@ -1,5 +1,6 @@
 #include <iostream>
 #include <Windows.h>
+#include <sstream>
 
 #include "memtrace.h"
 #include "gtest_lite.h"
@@ -8,6 +9,7 @@
 #include "Vonat.h"
 #include "List.hpp"
 #include "string.h"
+#include "SmartPtr.hpp"
 
 int main() {
 	//A windowsban a megfelelõ megjelenítéshez
@@ -34,22 +36,22 @@ int main() {
 
 	TEST(tarsasag, menetjegyvasarlasa) {
 		std::stringstream ss;
-		Jegy* menetjegy, * hely;
+		SmartPtr<Jegy> menetjegy, hely;
 		t.buyTicket(1000, menetjegy, hely);
-		ss << menetjegy << hely;
+		menetjegy->kiir(ss);
+		hely->kiir(ss);
 		std::string str = "menetjegy vagyok\nhely: 1\n";
 		EXPECT_EQ(str, ss.str());
-		delete menetjegy;
 	} END;
 
 	TEST(tarsasag, diakjegyvasarlasa) {
 		std::stringstream ss;
-		Jegy* diakjegy, * hely;
+		SmartPtr<Jegy> diakjegy, hely;
 		t.buyStudentTicket(1000, diakjegy, hely);
-		ss << diakjegy << hely;
-		std::string str = "diak_ig: 12345678\nhely: 1\n";
+		diakjegy->kiir(ss);
+		hely->kiir(ss);
+		std::string str = "diak_ig szam: 123456789\nhely: 1\n";
 		EXPECT_EQ(str, ss.str());
-		delete diakjegy;
 	} END;
 	
 	std::cout << "\nA kód lefutott, Enter a bezáráshoz";

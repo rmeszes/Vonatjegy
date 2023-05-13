@@ -3,6 +3,7 @@
 
 #include "List.hpp"
 #include "string.h"
+#include "SmartPtr.hpp"
 
 class Kocsi {
 public:
@@ -41,16 +42,16 @@ public:
 	virtual int getszam() const { return 123456789; }
 	virtual int getVonat() const { return 1000; }
 	virtual ~Jegy() {}
-	virtual std::ostream& operator<<(std::ostream& os) const {
-		return os << "jegy vagyok\n";
+	virtual void kiir(std::ostream& os) const {
+		os << "jegy vagyok\n";
 	}
 };
 
 class Menetjegy :public Jegy {
 public:
 	Menetjegy(int ar, int szam, int vonat) :Jegy(ar, szam, vonat) {}
-	std::ostream& operator<<(std::ostream& os) const {
-		return os << "menetjegy vagyok\n";
+	void kiir(std::ostream& os) const {
+		os << "menetjegy vagyok\n";
 	}
 	~Menetjegy() {}
 };
@@ -58,16 +59,16 @@ public:
 class Diakjegy :public Jegy {
 public:
 	Diakjegy(int ar, int szam, int vonat, int diakigazolvany) :Jegy(ar, szam, vonat) {}
-	std::ostream& operator<<(std::ostream& os) const {
-		return os << "diak_ig szam: " << 123456789 << "\n";
+	void kiir(std::ostream& os) const {
+		os << "diak_ig szam: " << 123456789 << "\n";
 	}
 };
 
 class Helyjegy : public Jegy {
 public:
 	Helyjegy(int ar, int szam, int vonat, int kocsi, int hely) :Jegy(ar, szam, vonat) {}
-	std::ostream& operator<<(std::ostream& os) const {
-		return os << "hely: " << 1 << "\n";
+	void kiir(std::ostream& os) const {
+		os << "hely: " << 1 << "\n";
 	}
 };
 
@@ -78,11 +79,11 @@ public:
 	
 	void listVonatok(std::ostream& os) const { os << "vonatok listája"; }
 
-	void buyTicket(int vonatszam, Jegy* menetjegy, Jegy* helyjegy) {
+	void buyTicket(int vonatszam, SmartPtr<Jegy>& menetjegy, SmartPtr<Jegy>& helyjegy) {
 		menetjegy = new Menetjegy(200, 123456789, 1000);
 		helyjegy = new Helyjegy(200, 987654321, 1000, 100, 1);
 	}
-	void buyStudentTicket(int vonatszam, Jegy* diakjegy, Jegy* helyjegy) {
+	void buyStudentTicket(int vonatszam, SmartPtr<Jegy>& diakjegy, SmartPtr<Jegy>& helyjegy) {
 		diakjegy = new Diakjegy(200, 123456789, 1000, 71613347453);
 		helyjegy = new Helyjegy(200, 987654321, 1000, 100, 1);
 	}
