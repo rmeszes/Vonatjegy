@@ -28,45 +28,64 @@ public:
 	String getErkIdo() const { return "13:00"; }
 	int getAr() const { return 1000; }
 
-	void findSeat(int* ret) {}
+	void findSeat(int* ret) {
+		ret[0] = 100;
+		ret[1] = 1;
+	}
 };
 
 class Jegy {
-	Vonat& vonat;
 public:
-	Jegy(int ar, int szam, Vonat& vonat) :vonat(vonat) {}
+	Jegy(int ar, int szam, int vonat) {}
 	virtual int getAr() const { return 250; }
 	virtual int getszam() const { return 123456789; }
-	virtual Vonat& getVonat() const { return vonat; }
+	virtual int getVonat() const { return 1000; }
 	virtual ~Jegy() {}
-	virtual void kiir(std::ostream& os) const { os << "jegy vagyok"; }
+	virtual std::ostream& operator<<(std::ostream& os) const {
+		return os << "jegy vagyok\n";
+	}
 };
 
 class Menetjegy :public Jegy {
 public:
-	Menetjegy(int ar, int szam, Vonat& vonat) :Jegy(ar, szam, vonat) {}
+	Menetjegy(int ar, int szam, int vonat) :Jegy(ar, szam, vonat) {}
+	std::ostream& operator<<(std::ostream& os) const {
+		return os << "menetjegy vagyok\n";
+	}
+	~Menetjegy() {}
 };
 
 class Diakjegy :public Jegy {
 public:
-	Diakjegy(int ar, int szam, Vonat& vonat, int diakigazolvany) :Jegy(ar, szam, vonat) {}
-	void kiir(std::ostream& os) const {
-		os << "diakjegy vagyok";
+	Diakjegy(int ar, int szam, int vonat, int diakigazolvany) :Jegy(ar, szam, vonat) {}
+	std::ostream& operator<<(std::ostream& os) const {
+		return os << "diak_ig szam: " << 123456789 << "\n";
+	}
+};
+
+class Helyjegy : public Jegy {
+public:
+	Helyjegy(int ar, int szam, int vonat, int kocsi, int hely) :Jegy(ar, szam, vonat) {}
+	std::ostream& operator<<(std::ostream& os) const {
+		return os << "hely: " << 1 << "\n";
 	}
 };
 
 
 class Tarsasag {
-	List<Vonat> vonatok;
 public:
-	void addVonat(int vonat_szam, size_t kocsik_szama, size_t helyek_szama, String ind, String erk, String indido, String erkido, int ar) {
-		vonatok.Add(Vonat(1000, 1, 60, "", "", "", "", 200));
-	}
+	void addVonat(int vonat_szam, size_t kocsik_szama, size_t helyek_szama, String ind, String erk, String indido, String erkido, int ar) {}
 	
 	void listVonatok(std::ostream& os) const { os << "vonatok listája"; }
 
-	void buyTicket(int vonatszam, Jegy* ret) { ret = new Menetjegy(200, 123456789, *vonatok[0]); }
-	void buyStudentTicket(int vonatszam, Jegy* ret) { ret = new Diakjegy(200, 123456789, *vonatok[0], 71613347453); }
+	void buyTicket(int vonatszam, Jegy* menetjegy, Jegy* helyjegy) {
+		menetjegy = new Menetjegy(200, 123456789, 1000);
+		helyjegy = new Helyjegy(200, 987654321, 1000, 100, 1);
+	}
+	void buyStudentTicket(int vonatszam, Jegy* diakjegy, Jegy* helyjegy) {
+		diakjegy = new Diakjegy(200, 123456789, 1000, 71613347453);
+		helyjegy = new Helyjegy(200, 987654321, 1000, 100, 1);
+	}
 
 	void eladottJegyek(std::ostream& os) const { os << "jegyek listázása"; }
 };
