@@ -53,6 +53,10 @@ int main() {
 		std::string str = "diak_ig szam: 123456789\nhely: 1\n";
 		EXPECT_EQ(str, ss.str());
 	} END;
+
+	TEST(tarsasag, vonathozzaad) {
+		ASSERT_NO_THROW(t.addVonat(1000, 5, 30, String("Budapest"), String("Miskolc"), String("12:00"), String("14:00"), 2000));
+	} END;
 	
 	std::cout << "\nA kód lefutott, Enter a bezáráshoz";
 	std::cin.get();
