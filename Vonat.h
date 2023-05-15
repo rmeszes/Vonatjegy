@@ -42,7 +42,7 @@ public:
 	virtual int getszam() const { return 123456789; }
 	virtual int getVonat() const { return 1000; }
 	virtual ~Jegy() {}
-	virtual void kiir(std::ostream& os) const {
+	virtual void kiir(std::ostream& os = std::cout) const {
 		os << "jegy vagyok\n";
 	}
 };
@@ -50,7 +50,7 @@ public:
 class Menetjegy :public Jegy {
 public:
 	Menetjegy(int ar, int szam, int vonat) :Jegy(ar, szam, vonat) {}
-	void kiir(std::ostream& os) const {
+	void kiir(std::ostream& os = std::cout) const {
 		os << "menetjegy vagyok\n";
 	}
 	~Menetjegy() {}
@@ -59,7 +59,7 @@ public:
 class Diakjegy :public Jegy {
 public:
 	Diakjegy(int ar, int szam, int vonat, int diakigazolvany) :Jegy(ar, szam, vonat) {}
-	void kiir(std::ostream& os) const {
+	void kiir(std::ostream& os = std::cout) const {
 		os << "diak_ig szam: " << 123456789 << "\n";
 	}
 };
@@ -67,7 +67,7 @@ public:
 class Helyjegy : public Jegy {
 public:
 	Helyjegy(int ar, int szam, int vonat, int kocsi, int hely) :Jegy(ar, szam, vonat) {}
-	void kiir(std::ostream& os) const {
+	void kiir(std::ostream& os = std::cout) const {
 		os << "hely: " << 1 << "\n";
 	}
 };

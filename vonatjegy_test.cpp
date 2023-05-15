@@ -19,7 +19,15 @@ int main() {
 #endif
 
 	//tesztek ide
+
+	//-------- Társaság class tesztjei
 	Tarsasag t; //késõbb is kelleni fog
+
+	TEST(tarsasag, vonathozzaad) {
+		//ez a teszt még felesleges, de érdemes ideírni, késõbb tesztelni kell
+		ASSERT_NO_THROW(t.addVonat(1000, 5, 30, String("Budapest"), String("Miskolc"), String("12:00"), String("14:00"), 2000));
+	} END;
+
 	TEST(tarsasag, listvonatok) {
 		std::stringstream ss;
 		t.listVonatok(ss);
@@ -54,9 +62,22 @@ int main() {
 		EXPECT_EQ(str, ss.str());
 	} END;
 
-	TEST(tarsasag, vonathozzaad) {
-		ASSERT_NO_THROW(t.addVonat(1000, 5, 30, String("Budapest"), String("Miskolc"), String("12:00"), String("14:00"), 2000));
+	//-------- Jegy class tesztjei
+	SmartPtr<Jegy> jegyek[4];
+	TEST(jegy, letrehoz) {
+		jegyek[0] = new Jegy(200, 12345678, 1000); 
+		jegyek[1] = new Menetjegy(200, 12345678, 1000);
+		jegyek[2] = new Diakjegy(200, 12345678, 1000, 71613347453);
+		jegyek[3] = new Helyjegy(200, 12345678, 1000, 100, 1);
+		
+		std::stringstream ss;
+		for (size_t i = 0; i < 4; i++) {
+			jegyek[i]->kiir(ss);
+		}
+		std::string str("jegy vagyok\nmenetjegy vagyok\ndiak_ig szam: 123456789\nhely: 1\n");
+		EXPECT_EQ(str, ss.str());
 	} END;
+
 	
 	std::cout << "\nA kód lefutott, Enter a bezáráshoz";
 	std::cin.get();
