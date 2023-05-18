@@ -6,16 +6,19 @@
 #include "SmartPtr.hpp"
 
 class Kocsi {
+	int kocsi_szam;
+	bool* helyek;
+	size_t helyek_szama;
 public:
-	Kocsi(int kocsi_szam = 0, size_t helyek_szama = 0) {}
-	Kocsi(const Kocsi& k) :Kocsi() {}
+	Kocsi(int kocsi_szam = 0, size_t helyek_szama = 0);
+	Kocsi(const Kocsi& k);
 
-	Kocsi& operator=(const Kocsi& k) { return *this; }
+	Kocsi& operator=(const Kocsi& k);
 
-	int getKocsiSzam() const { return 100; }
-	int getHely() const { return 60; }
+	int getKocsiSzam() const { return kocsi_szam; }
+	int getHely() const;
 
-	~Kocsi() {}
+	~Kocsi() { delete[] helyek; }
 };
 
 class Vonat {
