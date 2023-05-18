@@ -55,7 +55,7 @@ int main() {
 	TEST(tarsasag, diakjegyvasarlasa) {
 		std::stringstream ss;
 		SmartPtr<Jegy> diakjegy, hely;
-		t.buyStudentTicket(1000, diakjegy, hely);
+		t.buyStudentTicket(1000, diakjegy, hely, String("71613347453"));
 		diakjegy->kiir(ss);
 		hely->kiir(ss);
 		std::string str = "diak_ig szam: 71613347453\nhely: 1\n";

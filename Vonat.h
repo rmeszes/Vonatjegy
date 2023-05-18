@@ -10,7 +10,7 @@ class Kocsi {
 	bool* helyek;
 	size_t helyek_szama;
 public:
-	Kocsi(int kocsi_szam = 0, size_t helyek_szama = 0);
+	Kocsi(int kocsi_szam, size_t helyek_szama);
 	Kocsi(const Kocsi& k);
 
 	Kocsi& operator=(const Kocsi& k);
@@ -22,20 +22,22 @@ public:
 };
 
 class Vonat {
+	int vonat_szam;
+	size_t kocsik_szama;
+	String ind, erk, indido, erkido;
+	int ar;
+	List<Kocsi> kocsik;
 public:
-	Vonat(int vonat_szam, size_t kocsik_szama, size_t helyek_szama, String ind, String erk, String indido, String erkido, int ar) {}
+	Vonat(int vonat_szam, size_t kocsik_szama, size_t helyek_szama, String ind, String erk, String indido, String erkido, int ar);
 
-	int getVonatSzam() const { return 1000; }
-	String getIndAll() const { return "indulási állomás"; }
-	String getErkAll() const { return "érkezési állomás"; }
-	String getIndIdo() const { return "12:00"; }
-	String getErkIdo() const { return "13:00"; }
-	int getAr() const { return 1000; }
+	int getVonatSzam() const { return vonat_szam; }
+	String getIndAll() const { return ind; }
+	String getErkAll() const { return erk; }
+	String getIndIdo() const { return indido; }
+	String getErkIdo() const { return erkido; }
+	int getAr() const { return ar; }
 
-	void findSeat(int* ret) {
-		ret[0] = 100;
-		ret[1] = 1;
-	}
+	void findSeat(int* ret);
 };
 
 class Jegy {
@@ -62,12 +64,12 @@ public:
 
 class Diakjegy :public Jegy {
 public:
-	Diakjegy(int ar, int szam, int vonat, int diakigazolvany) :Jegy(ar, szam, vonat) {}
+	Diakjegy(int ar, int szam, int vonat, String diakigazolvany) :Jegy(ar, szam, vonat) {}
 	int getAr() const { return 20; }
 	int getszam() const { return 123456789; }
 	int getVonat() const { return 1000; }
 	void kiir(std::ostream& os = std::cout) const {
-		os << "diak_ig szam: " << 71613347453 << "\n";
+		os << "diak_ig szam: " << "71613347453" << "\n";
 	}
 };
 
@@ -93,8 +95,8 @@ public:
 		menetjegy = new Menetjegy(200, 123456789, 1000);
 		helyjegy = new Helyjegy(200, 987654321, 1000, 100, 1);
 	}
-	void buyStudentTicket(int vonatszam, SmartPtr<Jegy>& diakjegy, SmartPtr<Jegy>& helyjegy) {
-		diakjegy = new Diakjegy(200, 123456789, 1000, 71613347453);
+	void buyStudentTicket(int vonatszam, SmartPtr<Jegy>& diakjegy, SmartPtr<Jegy>& helyjegy, String ig_szam) {
+		diakjegy = new Diakjegy(200, 123456789, 1000, ig_szam);
 		helyjegy = new Helyjegy(200, 987654321, 1000, 100, 1);
 	}
 

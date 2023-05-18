@@ -52,7 +52,7 @@ int Kocsi::getHely() const
 /// Megpróbál helyet foglalni a vonaton
 /// </summary>
 /// <param name="ret">2 méretû tömb, ennek az elsõ helyére kerül a kocsiszám, a másodikba a hely szám</param>
-void Vonat::findSeat(unsigned int* ret)
+void Vonat::findSeat(int* ret)
 {
 	Kocsi* temp = kocsik[0];
 	unsigned int hely = 0;
@@ -68,5 +68,14 @@ void Vonat::findSeat(unsigned int* ret)
 	}
 	else {
 		ret[0] = 0; ret[1] = 0; //ha nem, akkor 0
+	}
+}
+
+Vonat::Vonat(int vonat_szam, size_t kocsik_szama, size_t helyek_szama, String ind, String erk, String indido, String erkido, int ar) 
+	:vonat_szam(vonat_szam), kocsik_szama(kocsik_szama), ind(ind), erk(erk), indido(indido), erkido(erkido), ar(ar)
+{
+	for (size_t i = 0; i < kocsik_szama; i++) //elkészítjük a kocsikat
+	{
+		kocsik.Add(Kocsi(100 + i, helyek_szama));
 	}
 }
