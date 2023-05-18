@@ -48,6 +48,15 @@ int Kocsi::getHely() const
 	return 0;
 }
 
+Vonat::Vonat(int vonat_szam, size_t kocsik_szama, size_t helyek_szama, String ind, String erk, String indido, String erkido, int ar)
+	:vonat_szam(vonat_szam), kocsik_szama(kocsik_szama), ind(ind), erk(erk), indido(indido), erkido(erkido), ar(ar)
+{
+	for (size_t i = 0; i < kocsik_szama; i++) //elkészítjük a kocsikat
+	{
+		kocsik.Add(Kocsi(100 + i, helyek_szama));
+	}
+}
+
 /// <summary>
 /// Megpróbál helyet foglalni a vonaton
 /// </summary>
@@ -68,14 +77,5 @@ void Vonat::findSeat(int* ret)
 	}
 	else {
 		ret[0] = 0; ret[1] = 0; //ha nem, akkor 0
-	}
-}
-
-Vonat::Vonat(int vonat_szam, size_t kocsik_szama, size_t helyek_szama, String ind, String erk, String indido, String erkido, int ar) 
-	:vonat_szam(vonat_szam), kocsik_szama(kocsik_szama), ind(ind), erk(erk), indido(indido), erkido(erkido), ar(ar)
-{
-	for (size_t i = 0; i < kocsik_szama; i++) //elkészítjük a kocsikat
-	{
-		kocsik.Add(Kocsi(100 + i, helyek_szama));
 	}
 }

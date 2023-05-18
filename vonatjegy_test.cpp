@@ -66,7 +66,7 @@ int main() {
 	SmartPtr<Jegy> jegyek[3];
 	TEST(jegy, letrehoz) {
 		jegyek[0] = new Menetjegy(200, 12345678, 1000);
-		jegyek[1] = new Diakjegy(200, 12345678, 1000, 71613347453);
+		jegyek[1] = new Diakjegy(200, 12345678, 1000, String("71613347453"));
 		jegyek[2] = new Helyjegy(200, 12345678, 1000, 100, 1);
 		
 		std::stringstream ss;
@@ -88,11 +88,11 @@ int main() {
 	TEST(vonat, fuggvenyek) {
 		Vonat v(1000, 5, 30, String("Budapest"), String("Miskolc"), String("12:00"), String("14:00"), 2000);
 		EXPECT_EQ(1000, v.getVonatSzam());
-		EXPECT_STREQ("indulási állomás", v.getIndAll().c_str());
-		EXPECT_STREQ("érkezési állomás", v.getErkAll().c_str());
+		EXPECT_STREQ("Budapest", v.getIndAll().c_str());
+		EXPECT_STREQ("Miskolc", v.getErkAll().c_str());
 		EXPECT_STREQ("12:00", v.getIndIdo().c_str());
-		EXPECT_STREQ("13:00", v.getErkIdo().c_str());
-		EXPECT_EQ(1000, v.getAr());
+		EXPECT_STREQ("14:00", v.getErkIdo().c_str());
+		EXPECT_EQ(2000, v.getAr());
 		int seat[2];
 		v.findSeat(seat);
 		EXPECT_EQ(100, seat[0]);
@@ -101,7 +101,7 @@ int main() {
 
 	TEST(kocsi, tesztek) {
 		Kocsi k(100, 60);
-		EXPECT_EQ(60, k.getHely());
+		EXPECT_EQ(1, k.getHely());
 		EXPECT_EQ(100, k.getKocsiSzam());
 	} END;
 	
