@@ -3,55 +3,103 @@
 
 #include "List.hpp"
 #include "string.h"
+#include "SmartPtr.hpp"
 
 class Kocsi {
-	unsigned int kocsi_szam; 
+	int kocsi_szam;
 	bool* helyek;
 	size_t helyek_szama;
 public:
-	Kocsi(unsigned int kocsi_szam = 0, size_t helyek_szama = 0) :kocsi_szam(kocsi_szam), helyek_szama(helyek_szama) {
-		if (helyek_szama == 0) { helyek = nullptr; }
-		else { helyek = new bool[helyek_szama]; }
-		for (size_t i = 0; i < helyek_szama; i++) //inicializálom a tömb elemeit, hogy biztosan false legyen
-		{
-			helyek[i] = false;
-		}
-	}
-
-	Kocsi(const Kocsi& k) :kocsi_szam(k.kocsi_szam), helyek_szama(k.helyek_szama) {
-		helyek = new bool[helyek_szama];
-		for (size_t i = 0; i < helyek_szama; i++)
-		{
-			this->helyek[i] = k.helyek[i];
-		}
-	}
+	Kocsi(int kocsi_szam, size_t helyek_szama);
+	Kocsi(const Kocsi& k);
 
 	Kocsi& operator=(const Kocsi& k);
 
+	int getKocsiSzam() const { return kocsi_szam; }
+	int getHely() const;
+
 	~Kocsi() { delete[] helyek; }
-
-	unsigned int getKocsiSzam() const { return kocsi_szam; }
-
-	unsigned int getHely() const;
-
-	bool* getHelyek() const { return helyek; }
 };
 
 class Vonat {
-	unsigned int vonat_szam;
-	List<Kocsi> kocsik;
+	int vonat_szam;
 	size_t kocsik_szama;
+	String ind, erk, indido, erkido;
+	int ar;
+	List<Kocsi> kocsik;
 public:
-	Vonat(unsigned int vonat_szam, size_t kocsik_szama, size_t helyek_szama) :vonat_szam(vonat_szam), kocsik_szama(kocsik_szama) {
-		for (size_t i = 0; i < kocsik_szama; i++) //elkészítjük a kocsikat
-		{
-			kocsik.Add(Kocsi(100 + i, helyek_szama));
-		}
-	}
+	Vonat(int vonat_szam, size_t kocsik_szama, size_t helyek_szama, String ind, String erk, String indido, String erkido, int ar);
 
-	unsigned int getVonatSzam() const { return vonat_szam; }
+	int getVonatSzam() const { return vonat_szam; }
+	String getIndAll() const { return ind; }
+	String getErkAll() const { return erk; }
+	String getIndIdo() const { return indido; }
+	String getErkIdo() const { return erkido; }
+	int getAr() const { return ar; }
 
-	void findSeat(unsigned int* ret);
+	void findSeat(int* ret);
 };
 
+class Jegy {
+public:
+	Jegy(int ar, int szam, int vonat) {}
+	virtual int getAr() const = 0;
+	virtual int getszam() const = 0;
+	virtual int getVonat() const = 0;
+	virtual void kiir(std::ostream& os = std::cout) const = 0;
+	virtual ~Jegy() {}
+};
+
+class Menetjegy :public Jegy {
+public:
+	Menetjegy(int ar, int szam, int vonat) :Jegy(ar, szam, vonat) {}
+	int getAr() const { return 200; }
+	int getszam() const { return 123456789; }
+	int getVonat() const { return 1000; }
+	void kiir(std::ostream& os = std::cout) const {
+		os << "menetjegy vagyok\n";
+	}
+	~Menetjegy() {}
+};
+
+class Diakjegy :public Jegy {
+public:
+	Diakjegy(int ar, int szam, int vonat, String diakigazolvany) :Jegy(ar, szam, vonat) {}
+	int getAr() const { return 20; }
+	int getszam() const { return 123456789; }
+	int getVonat() const { return 1000; }
+	void kiir(std::ostream& os = std::cout) const {
+		os << "diak_ig szam: " << "71613347453" << "\n";
+	}
+};
+
+class Helyjegy : public Jegy {
+public:
+	Helyjegy(int ar, int szam, int vonat, int kocsi, int hely) :Jegy(ar, szam, vonat) {}
+	int getAr() const { return 20; }
+	int getszam() const { return 123456789; }
+	int getVonat() const { return 1000; }
+	void kiir(std::ostream& os = std::cout) const {
+		os << "hely: " << 1 << "\n";
+	}
+};
+
+
+class Tarsasag {
+public:
+	void addVonat(Vonat& v) {}
+	
+	void listVonatok(std::ostream& os) const { os << "vonatok listája"; }
+
+	void buyTicket(int vonatszam, SmartPtr<Jegy>& menetjegy, SmartPtr<Jegy>& helyjegy) {
+		menetjegy = new Menetjegy(200, 123456789, 1000);
+		helyjegy = new Helyjegy(200, 987654321, 1000, 100, 1);
+	}
+	void buyStudentTicket(int vonatszam, SmartPtr<Jegy>& diakjegy, SmartPtr<Jegy>& helyjegy, String ig_szam) {
+		diakjegy = new Diakjegy(200, 123456789, 1000, ig_szam);
+		helyjegy = new Helyjegy(200, 987654321, 1000, 100, 1);
+	}
+
+	void eladottJegyek(std::ostream& os) const { os << "jegyek listázása"; }
+};
 #endif // !VONAT_H

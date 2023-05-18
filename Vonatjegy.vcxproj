@@ -38,7 +38,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
-    <EnableASAN>false</EnableASAN>
+    <EnableASAN>true</EnableASAN>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -101,7 +101,11 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PreprocessorDefinitions>MEMTRACE</PreprocessorDefinitions>
+      <BasicRuntimeChecks />
     </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="memtrace.cpp" />
@@ -113,6 +117,7 @@
     <ClInclude Include="gtest_lite.h" />
     <ClInclude Include="List.hpp" />
     <ClInclude Include="memtrace.h" />
+    <ClInclude Include="SmartPtr.hpp" />
     <ClInclude Include="string.h" />
     <ClInclude Include="Vonat.h" />
   </ItemGroup>

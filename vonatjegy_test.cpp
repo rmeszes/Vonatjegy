@@ -1,5 +1,6 @@
 #include <iostream>
 #include <Windows.h>
+#include <sstream>
 
 #include "memtrace.h"
 #include "gtest_lite.h"
@@ -7,6 +8,8 @@
 
 #include "Vonat.h"
 #include "List.hpp"
+#include "string.h"
+#include "SmartPtr.hpp"
 
 int main() {
 	//A windowsban a megfelelõ megjelenítéshez
@@ -15,37 +18,93 @@ int main() {
 	SetConsoleOutputCP(1250);
 #endif
 
-	TEST(lista, ctor) {
-		ASSERT_NO_THROW(List<size_t> lista);
-	} ENDM
+	//tesztek ide
 
-	TEST(list_add, hozzaadas) {
-		List<size_t> lista;
-		lista.Add(1);
-		EXPECT_EQ(1, *lista[0]);
-	} ENDM
+	//-------- Társaság class tesztjei
+	Tarsasag t; //késõbb is kelleni fog
 
-	TEST(vonat, ctor) {
-		ASSERT_NO_THROW(Vonat v(1000, 2, 3));
-	} ENDM
+	TEST(tarsasag, vonathozzaad) {
+		//ez a teszt még felesleges, de érdemes ideírni, késõbb tesztelni kell
+		ASSERT_NO_THROW(t.addVonat(Vonat(1000, 5, 30, String("Budapest"), String("Miskolc"), String("12:00"), String("14:00"), 2000)));
+	} END;
 
-	TEST(vonat_ertekek, getters) {
-		Vonat v(1001, 4, 100);
-		EXPECT_EQ(1001, v.getVonatSzam());
-	} ENDM
+	TEST(tarsasag, listvonatok) {
+		std::stringstream ss;
+		t.listVonatok(ss);
+		std::string str = "vonatok listája";
+		EXPECT_EQ(str, ss.str());
+	} END;
 
-	TEST(hely, foglalas) {
-		Vonat v(1002, 3, 2);
-		unsigned int hely[2];
-		v.findSeat(hely);
-		EXPECT_EQ(100, hely[0]);
-		EXPECT_EQ(1, hely[1]);
-	} ENDM
+	TEST(tarsasag, eladottjegyek) {
+		std::stringstream ss;
+		t.eladottJegyek(ss);
+		std::string str = "jegyek listázása";
+		EXPECT_EQ(str, ss.str());
+	} END;
 
-	List<Vonat> lista;
-	lista.Add(Vonat(1000, 10, 60));
+	TEST(tarsasag, menetjegyvasarlasa) {
+		std::stringstream ss;
+		SmartPtr<Jegy> menetjegy, hely;
+		t.buyTicket(1000, menetjegy, hely);
+		menetjegy->kiir(ss);
+		hely->kiir(ss);
+		std::string str = "menetjegy vagyok\nhely: 1\n";
+		EXPECT_EQ(str, ss.str());
+	} END;
 
+	TEST(tarsasag, diakjegyvasarlasa) {
+		std::stringstream ss;
+		SmartPtr<Jegy> diakjegy, hely;
+		t.buyStudentTicket(1000, diakjegy, hely, String("71613347453"));
+		diakjegy->kiir(ss);
+		hely->kiir(ss);
+		std::string str = "diak_ig szam: 71613347453\nhely: 1\n";
+		EXPECT_EQ(str, ss.str());
+	} END;
 
+	//-------- Jegy class tesztjei
+	SmartPtr<Jegy> jegyek[3];
+	TEST(jegy, letrehoz) {
+		jegyek[0] = new Menetjegy(200, 12345678, 1000);
+		jegyek[1] = new Diakjegy(200, 12345678, 1000, 71613347453);
+		jegyek[2] = new Helyjegy(200, 12345678, 1000, 100, 1);
+		
+		std::stringstream ss;
+		for (size_t i = 0; i < 3; i++) {
+			jegyek[i]->kiir(ss);
+		}
+		std::string str("menetjegy vagyok\ndiak_ig szam: 71613347453\nhely: 1\n");
+		EXPECT_EQ(str, ss.str());
+	} END;
+
+	TEST(jegy, fuggvenyek) {
+		EXPECT_EQ(200, jegyek[0]->getAr());
+		EXPECT_EQ(123456789, jegyek[1]->getszam());
+		EXPECT_EQ(1000, jegyek[2]->getVonat());
+	} END;
+
+	//-------- Vonat class tesztjei
+	
+	TEST(vonat, fuggvenyek) {
+		Vonat v(1000, 5, 30, String("Budapest"), String("Miskolc"), String("12:00"), String("14:00"), 2000);
+		EXPECT_EQ(1000, v.getVonatSzam());
+		EXPECT_STREQ("indulási állomás", v.getIndAll().c_str());
+		EXPECT_STREQ("érkezési állomás", v.getErkAll().c_str());
+		EXPECT_STREQ("12:00", v.getIndIdo().c_str());
+		EXPECT_STREQ("13:00", v.getErkIdo().c_str());
+		EXPECT_EQ(1000, v.getAr());
+		int seat[2];
+		v.findSeat(seat);
+		EXPECT_EQ(100, seat[0]);
+		EXPECT_EQ(1, seat[1]);
+	} END;
+
+	TEST(kocsi, tesztek) {
+		Kocsi k(100, 60);
+		EXPECT_EQ(60, k.getHely());
+		EXPECT_EQ(100, k.getKocsiSzam());
+	} END;
+	
 	std::cout << "\nA kód lefutott, Enter a bezáráshoz";
 	std::cin.get();
 	return 0;
