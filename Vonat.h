@@ -22,10 +22,15 @@ public:
 	~Kocsi() { delete[] helyek; }
 };
 
+struct Allomas {
+	String nev;
+	String ido;
+};
+
 class Vonat {
 	int vonat_szam;
 	size_t kocsik_szama;
-	String ind, erk, indido, erkido;
+	List<Allomas> allomasok;
 	int ar;
 	List<Kocsi> kocsik;
 public:
