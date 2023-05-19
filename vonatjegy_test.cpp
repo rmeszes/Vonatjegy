@@ -27,7 +27,10 @@ int main() {
 
 	TEST(tarsasag, vonathozzaad) {
 		//ez a teszt még felesleges, de érdemes ideírni, késõbb tesztelni kell
-		ASSERT_NO_THROW(t.addVonat(Vonat(1000, 5, 30, String("Budapest"), String("Miskolc"), String("12:00"), String("14:00"), 2000)));
+		List<Allomas> allomasok;
+		allomasok.Add(Allomas("Budapest","12:00"));
+		allomasok.Add(Allomas("Miskolc","14:00"));
+		ASSERT_NO_THROW(t.addVonat(Vonat(1000, 5, 30, 2000,allomasok)));
 	} END;
 
 	TEST(tarsasag, listvonatok) {
@@ -88,12 +91,11 @@ int main() {
 	//-------- Vonat class tesztjei
 	
 	TEST(vonat, fuggvenyek) {
-		Vonat v(1000, 5, 30, String("Budapest"), String("Miskolc"), String("12:00"), String("14:00"), 2000);
+		List<Allomas> allomasok;
+		allomasok.Add(Allomas("Budapest", "12:00"));
+		allomasok.Add(Allomas("Miskolc", "14:00"));
+		Vonat v(1000, 5, 30, 2000, allomasok);
 		EXPECT_EQ(1000, v.getVonatSzam());
-		EXPECT_STREQ("Budapest", v.getIndAll().c_str());
-		EXPECT_STREQ("Miskolc", v.getErkAll().c_str());
-		EXPECT_STREQ("12:00", v.getIndIdo().c_str());
-		EXPECT_STREQ("14:00", v.getErkIdo().c_str());
 		EXPECT_EQ(2000, v.getAr());
 		int seat[2];
 		v.findSeat(seat);
