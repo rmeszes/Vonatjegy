@@ -115,10 +115,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gtest_lite.h" />
+    <ClInclude Include="Jegy.h" />
     <ClInclude Include="List.hpp" />
     <ClInclude Include="memtrace.h" />
     <ClInclude Include="SmartPtr.hpp" />
     <ClInclude Include="string.h" />
+    <ClInclude Include="Tarsasag.h" />
     <ClInclude Include="Vonat.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

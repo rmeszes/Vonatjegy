@@ -1,5 +1,8 @@
 #ifndef SMARTPTR_H
 #define SMARTPTR_H
+
+#include "memtrace.h"
+
 template<typename T>
 class SmartPtr
 {

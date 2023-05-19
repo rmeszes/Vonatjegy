@@ -10,6 +10,8 @@
 #include "List.hpp"
 #include "string.h"
 #include "SmartPtr.hpp"
+#include "Tarsasag.h"
+#include "Jegy.h"
 
 int main() {
 	//A windowsban a megfelelõ megjelenítéshez
