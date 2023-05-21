@@ -4,42 +4,24 @@
 #include <iostream>
 template<class T> class List
 {
-	struct ListElement {
-		T data;
-		ListElement* next;
-		ListElement(T data, ListElement* p = nullptr) :next(p), data(data) {}
-	};
-	ListElement* start, * current;
+    struct ListElement {
+        T data;
+        ListElement* next;
+        ListElement(ListElement* p = nullptr) :next(p) {}
+    };
+    ListElement* start;
 public:
-    List() :start(nullptr), current(nullptr) {}
-
-    void Add(const T& data) {
-        if (start == nullptr) {
-            start = current = new ListElement(data);
-        }
-        else {
-            ListElement* p;
-            for (p = start; p->next != nullptr; p = p->next);
-            p->next = new ListElement(data);
-        }
+    List() {
+        start = new ListElement(); //strázsa
     }
 
+    class iterator;
     List(const List& l) :List() {
-        ListElement* p = l.start;
-        while (p != nullptr) {
-            Add(p->data);
-            p = p->next;
+        iterator first = l.begin();
+        iterator last = l.end();
+        while (first != last) {
+            this->Add(*first++);
         }
-    }
-
-    bool Next(T& data) {
-        if (current->next == nullptr) {
-            current = start;
-            return false;
-        }
-        data = current->data;
-        current = current->next;
-        return true;
     }
     ~List() {
         ListElement* p = start;
@@ -49,31 +31,56 @@ public:
             delete temp;
         }
         start = nullptr;
-        current = nullptr;
     }
-    T getCurrent() const {
-        return current->data;
+
+    void Add(const T& data) {
+        ListElement* p = new ListElement(start);
+        p->data = data;
+        start = p;
     }
-    T* operator[](const size_t i) { //indexelõ op., írhatóan adja vissza az adat pointerét
-        ListElement* p = start;
-        for (size_t j = 0; j < i; j++) {
-            p = p->next;
-            if (p == nullptr) {
-                throw std::out_of_range("List_out_of_bound"); //TODO catch, teszt
-            }
+
+    iterator begin() {
+        return(iterator(*this));
+    }
+
+    iterator end() {
+        return(iterator());
+    }
+
+    class iterator {
+        ListElement* curr;
+    public:
+        iterator() :curr(nullptr) {}; //végére állítja az iterátort
+        iterator(const List& l) :curr(l.start) {
+            if (curr->next == nullptr) curr = nullptr; //strázsa miatt
         }
-        return &p->data;
-    }
-    const T operator[](const size_t i) const { //indexelõ op., const esetén
-        ListElement* p = start;
-        for (size_t j = 0; j < i; j++) {
-            p = p->next;
-            if (p == nullptr) {
-                throw std::out_of_range("List_out_of_bound"); //TODO catch, teszt
+        iterator& operator++() { //pre
+            if (curr != nullptr) {
+                curr = curr->next;
+                if (curr->next == nullptr) curr = nullptr;
             }
+            return(*this);
         }
-        return p->data;
-    }
+        iterator operator++(int) { //post
+            iterator tmp = *this; //eltároljuk
+            operator++(); //növel
+            return(tmp);
+        }
+
+        bool operator!=(const iterator& i) const {
+            return curr != i.curr;
+        }
+
+        T& operator*() {
+            if (curr != nullptr) return curr->data;
+            else throw std::out_of_range("hibás iterátor");
+        }
+
+        T* operator->() {
+            if (curr != nullptr) return &curr->data;
+            else throw std::out_of_range("hibás iterátor");
+        }
+    };
 };
 
 #endif // !LIST_H
