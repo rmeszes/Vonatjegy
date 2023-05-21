@@ -15,12 +15,11 @@ public:
         start = new ListElement(); //strázsa
     }
 
-    class iterator;
     List(const List& l) :List() {
-        iterator first = l.begin();
-        iterator last = l.end();
-        while (first != last) {
-            this->Add(*first++);
+        ListElement* p = l.start;
+        while (p != nullptr) {
+            Add(p->data);
+            p = p->next;
         }
     }
     ~List() {
@@ -38,7 +37,7 @@ public:
         p->data = data;
         start = p;
     }
-
+    class iterator;
     iterator begin() {
         return(iterator(*this));
     }

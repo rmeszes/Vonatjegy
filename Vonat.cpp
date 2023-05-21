@@ -63,17 +63,17 @@ Vonat::Vonat(int vonat_szam, size_t kocsik_szama, size_t helyek_szama, int ar, L
 /// <param name="ret">2 méretû tömb, ennek az elsõ helyére kerül a kocsiszám, a másodikba a hely szám</param>
 void Vonat::findSeat(int* ret)
 {
-	Kocsi* temp = kocsik[0];
-	unsigned int hely = 0;
-	for (size_t i = 0; i < kocsik_szama; i++) {
-		temp = kocsik[i]; //megpróbál helyet kapni egy kocsin
-		hely = temp->getHely();
+	List<Kocsi>::iterator it = kocsik.begin();
+	int hely = 0;
+	while (it != kocsik.end()) { 
+		hely = it->getHely(); //megpróbál helyet kapni egy kocsin
 		if (hely != 0) break;
+		it++;
 	}
 	if (hely != 0) { //ha talált, a tömbbe teszem a kocsiszámot és hely számát
-		ret[0] = temp->getKocsiSzam();
+		ret[0] = it->getKocsiSzam();
 		ret[1] = hely;
-		std::cout << "Kiadtuk a " << temp->getKocsiSzam() << ". számú kocsi " << hely << ". számú ülését." << std::endl;
+		std::cout << "Kiadtuk a " << it->getKocsiSzam() << ". számú kocsi " << hely << ". számú ülését." << std::endl;
 	}
 	else {
 		ret[0] = 0; ret[1] = 0; //ha nem, akkor 0
