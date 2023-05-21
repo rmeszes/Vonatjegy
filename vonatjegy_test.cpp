@@ -24,12 +24,12 @@ int main() {
 
 	//-------- Társaság class tesztjei
 	Tarsasag t; //késõbb is kelleni fog
+	List<Allomas> allomasok;
+	allomasok.Add(Allomas("Budapest", "12:00"));
+	allomasok.Add(Allomas("Miskolc", "14:00"));
 
 	TEST(tarsasag, vonathozzaad) {
 		//ez a teszt még felesleges, de érdemes ideírni, késõbb tesztelni kell
-		List<Allomas> allomasok;
-		allomasok.Add(Allomas("Budapest","12:00"));
-		allomasok.Add(Allomas("Miskolc","14:00"));
 		ASSERT_NO_THROW(t.addVonat(Vonat(1000, 5, 30, 2000,allomasok)));
 	} END;
 
@@ -70,7 +70,7 @@ int main() {
 	//-------- Jegy class tesztjei
 	SmartPtr<Jegy> jegyek[3];
 	TEST(jegy, letrehoz) {
-		jegyek[0] = new Menetjegy(200, 12345678, 1000);
+		jegyek[0] = new Menetjegy(200, 12345678, 1000, allomasok.);
 		jegyek[1] = new Diakjegy(200, 12345678, 1000, String("71613347453"));
 		jegyek[2] = new Helyjegy(200, 12345678, 1000, 100, 1);
 		

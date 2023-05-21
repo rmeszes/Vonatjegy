@@ -7,9 +7,14 @@
 #include "string.h"
 
 class Jegy {
+protected:
+	static int sorszam;
+	double ar;
+	int szam, vonat;
+	String allomas1, allomas2, ind_ido, erk_ido;
 public:
-	Jegy(int ar, int szam, int vonat) {}
-	virtual int getAr() const = 0;
+	Jegy(double ar, int szam, int vonat, Allomas& ind, Allomas& erk) :ar(ar), szam(szam), vonat(vonat), allomas1(ind.nev), allomas2(erk.nev), ind_ido(ind.ido), erk_ido(erk.ido) {}
+	virtual double getAr() const = 0;
 	virtual int getszam() const = 0;
 	virtual int getVonat() const = 0;
 	virtual void kiir(std::ostream& os = std::cout) const = 0;
@@ -18,35 +23,37 @@ public:
 
 class Menetjegy :public Jegy {
 public:
-	Menetjegy(int ar, int szam, int vonat) :Jegy(ar, szam, vonat) {}
-	int getAr() const { return 200; }
-	int getszam() const { return 123456789; }
-	int getVonat() const { return 1000; }
+	Menetjegy(double ar, int szam, int vonat, Allomas& ind, Allomas& erk) :Jegy(ar, szam, vonat, ind, erk) {}
+	double getAr() const { return ar; }
+	int getszam() const { return szam; }
+	int getVonat() const { return vonat; }
 	void kiir(std::ostream& os = std::cout) const {
-		os << "menetjegy vagyok\n";
+		os << "Menetjegy\n\t" << allomas1 << " - " << allomas2 << "\n\t" << ind_ido << " - " << erk_ido << std::endl;
 	}
 	~Menetjegy() {}
 };
 
 class Diakjegy :public Jegy {
+	String ig_szam;
 public:
-	Diakjegy(int ar, int szam, int vonat, String diakigazolvany) :Jegy(ar, szam, vonat) {}
-	int getAr() const { return 20; }
-	int getszam() const { return 123456789; }
-	int getVonat() const { return 1000; }
+	Diakjegy(double ar, int szam, int vonat, Allomas& ind, Allomas& erk, String& diakigazolvany) :Jegy(ar, szam, vonat, ind, erk), ig_szam(diakigazolvany) {}
+	double getAr() const { return ar * 0.1; }
+	int getszam() const { return szam; }
+	int getVonat() const { return vonat; }
 	void kiir(std::ostream& os = std::cout) const {
-		os << "diak_ig szam: " << "71613347453" << "\n";
+		os << "Diakjegy\n\t" << allomas1 << " - " << allomas2 << "\n\t" << ind_ido << " - " << erk_ido << std::endl << "Diakigazolvany szam: " << ig_szam << std::endl;
 	}
 };
 
 class Helyjegy : public Jegy {
+	int kocsi, hely;
 public:
-	Helyjegy(int ar, int szam, int vonat, int kocsi, int hely) :Jegy(ar, szam, vonat) {}
-	int getAr() const { return 20; }
-	int getszam() const { return 123456789; }
-	int getVonat() const { return 1000; }
+	Helyjegy(double ar, int szam, int vonat, Allomas& ind, Allomas& erk, int kocsi, int hely) :Jegy(ar, szam, vonat, ind, erk), kocsi(kocsi), hely(hely) {}
+	double getAr() const { return ar * 0.2; }
+	int getszam() const { return szam; }
+	int getVonat() const { return vonat; }
 	void kiir(std::ostream& os = std::cout) const {
-		os << "hely: " << 1 << "\n";
+		os << "Helyjegy\n\t" << allomas1 << " - " << allomas2 << "\n\t" << ind_ido << " - " << erk_ido << std::endl << "Kocsi: " << kocsi << " Hely: " << hely << std::endl;
 	}
 };
 
