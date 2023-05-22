@@ -19,7 +19,11 @@ public:
 	int getKocsiSzam() const { return kocsi_szam; }
 	int getHely() const;
 
-	~Kocsi() { delete[] helyek; }
+	~Kocsi() { 
+		if (helyek_szama != 0) {
+			delete[] helyek;
+		}
+	}
 };
 
 /// <summary>
@@ -47,7 +51,5 @@ public:
 	int getAr() const { return ar; }
 
 	void findSeat(int* ret);
-
-	~Vonat() {}
 };
 #endif // !VONAT_H

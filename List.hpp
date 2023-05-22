@@ -20,7 +20,7 @@ public:
         iterator first = l.begin();
         iterator last = l.end();
         while (first != last) {
-            this->Add(*first++);
+            Add(*first++);
         }
     }
     ~List() {
