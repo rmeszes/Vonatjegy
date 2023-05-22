@@ -4,22 +4,23 @@
 #include <iostream>
 template<class T> class List
 {
-    struct ListElement {
-        T data;
-        ListElement* next;
-        ListElement(ListElement* p = nullptr) :next(p) {}
-    };
+	struct ListElement {
+		T data;
+		ListElement* next;
+		ListElement(ListElement* p = nullptr) :next(p) {}
+	};
     ListElement* start;
 public:
     List() {
         start = new ListElement(); //strázsa
     }
 
+    class iterator;
     List(const List& l) :List() {
-        ListElement* p = l.start;
-        while (p != nullptr) {
-            Add(p->data);
-            p = p->next;
+        iterator first = l.begin();
+        iterator last = l.end();
+        while (first != last) {
+            this->Add(*first++);
         }
     }
     ~List() {
@@ -37,7 +38,7 @@ public:
         p->data = data;
         start = p;
     }
-    class iterator;
+
     iterator begin() {
         return(iterator(*this));
     }
@@ -47,7 +48,7 @@ public:
     }
 
     class iterator {
-        ListElement* curr;
+        ListElement *curr;
     public:
         iterator() :curr(nullptr) {}; //végére állítja az iterátort
         iterator(const List& l) :curr(l.start) {
