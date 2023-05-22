@@ -53,7 +53,7 @@ Vonat::Vonat(int vonat_szam, size_t kocsik_szama, size_t helyek_szama, double ar
 {
 	for (size_t i = 0; i < kocsik_szama; i++) //elkészítjük a kocsikat
 	{
-		kocsik.Add(Kocsi(100 + i, helyek_szama));
+		kocsik.push_back(Kocsi(100 + i, helyek_szama));
 	}
 }
 

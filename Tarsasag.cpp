@@ -57,7 +57,7 @@ void Tarsasag::addVonat() {
 			cout << "Legalabb 2 allomast hozza kell adni!" << std::endl;
 		}
 		else {
-			allomasok.Add(Allomas(buffer, String()));
+			allomasok.push_back(Allomas(buffer, String()));
 			allomasok_size++;
 		}
 		buffer = String();
@@ -68,7 +68,7 @@ void Tarsasag::addVonat() {
 		}
 	}
 	
-	vonatok.Add(Vonat(vonatszam++, kocsik_szama, helyek_szama, ar, allomasok));
+	vonatok.push_back(Vonat(vonatszam++, kocsik_szama, helyek_szama, ar, allomasok));
 }
 
 
