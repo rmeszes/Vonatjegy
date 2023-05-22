@@ -110,6 +110,7 @@
   <ItemGroup>
     <ClCompile Include="memtrace.cpp" />
     <ClCompile Include="string.cpp" />
+    <ClCompile Include="Tarsasag.cpp" />
     <ClCompile Include="Vonat.cpp" />
     <ClCompile Include="vonatjegy_test.cpp" />
   </ItemGroup>
