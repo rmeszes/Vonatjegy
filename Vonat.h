@@ -31,6 +31,7 @@ struct Allomas {
 	String ido;
 	Allomas(const char* nev, const char* ido) :nev(nev), ido(ido) {}
 	Allomas(const String& nev = String(""), const String& ido = String("")) :nev(nev), ido(ido) {}
+	Allomas(const Allomas& a) :nev(nev), ido(ido) {}
 };
 
 class Vonat {
@@ -46,5 +47,7 @@ public:
 	int getAr() const { return ar; }
 
 	void findSeat(int* ret);
+
+	~Vonat() {}
 };
 #endif // !VONAT_H

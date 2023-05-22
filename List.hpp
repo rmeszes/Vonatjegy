@@ -15,11 +15,12 @@ public:
         start = new ListElement(); //strázsa
     }
 
-    List(const List& l) :List() {
-        ListElement* p = l.start;
-        while (p != nullptr) {
-            Add(p->data);
-            p = p->next;
+    class iterator;
+    List(List& l) :List() {
+        iterator first = l.begin();
+        iterator last = l.end();
+        while (first != last) {
+            this->Add(*first++);
         }
     }
     ~List() {
@@ -29,13 +30,24 @@ public:
             p = p->next;
             delete temp;
         }
-        start = nullptr;
     }
 
     void Add(const T& data) {
-        ListElement* p = new ListElement(start);
-        p->data = data;
-        start = p;
+        ListElement* new_element = new ListElement();
+        new_element->data = data;
+
+        if (start->next == nullptr) {
+            new_element->next = start;
+            start = new_element;
+        }
+        else {
+            ListElement* moving = start;
+            while (moving->next->next != NULL) {
+                moving = moving->next;
+            }
+            new_element->next = moving->next;
+            moving->next = new_element;
+        }
     }
     class iterator;
     iterator begin() {
