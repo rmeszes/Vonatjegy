@@ -19,7 +19,11 @@ public:
 	int getKocsiSzam() const { return kocsi_szam; }
 	int getHely() const;
 
-	~Kocsi() { delete[] helyek; }
+	~Kocsi() { 
+		if (helyek_szama != 0) {
+			delete[] helyek;
+		}
+	}
 };
 
 /// <summary>
@@ -30,18 +34,18 @@ struct Allomas {
 	String nev; 
 	String ido;
 	Allomas(const char* nev, const char* ido) :nev(nev), ido(ido) {}
-	Allomas(const String& nev, const String& ido) :nev(nev), ido(ido) {}
-	Allomas() :nev(""), ido("") {}
+	Allomas(const String& nev = String(""), const String& ido = String("")) :nev(nev), ido(ido) {}
+	Allomas(const Allomas& a) :nev(nev), ido(ido) {}
 };
 
 class Vonat {
 	int vonat_szam;
 	size_t kocsik_szama;
-	int ar;
+	double ar;
 	List<Allomas> allomasok;
 	List<Kocsi> kocsik;
 public:
-	Vonat(int vonat_szam, size_t kocsik_szama, size_t helyek_szama, int ar, List<Allomas>& allomasok);
+	Vonat(int vonat_szam = 0, size_t kocsik_szama = 0, size_t helyek_szama = 0, double ar = 0, List<Allomas>& allomasok = List<Allomas>());
 
 	int getVonatSzam() const { return vonat_szam; }
 	int getAr() const { return ar; }

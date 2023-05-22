@@ -8,19 +8,19 @@
 #include "Jegy.h"
 
 class Tarsasag {
+	int jegyszam;
+	int vonatszam;
+	List<Vonat> vonatok;
+	List<SmartPtr<Jegy>> eladott_jegyek;
 public:
-	void addVonat(Vonat& v) {}
+	Tarsasag() :jegyszam(1000000), vonatszam(1000) {}
+
+	void addVonat();
 
 	void listVonatok(std::ostream& os) const { os << "vonatok listája"; }
 
-	void buyTicket(int vonatszam, SmartPtr<Jegy>& menetjegy, SmartPtr<Jegy>& helyjegy, Allomas& ind, Allomas& erk) {
-		menetjegy = new Menetjegy(200, 123456789, 1000, ind, erk);
-		helyjegy = new Helyjegy(200, 987654321, 1000, ind, erk, 100, 1);
-	}
-	void buyStudentTicket(int vonatszam, SmartPtr<Jegy>& diakjegy, SmartPtr<Jegy>& helyjegy, Allomas& ind, Allomas& erk, String ig_szam) {
-		diakjegy = new Diakjegy(200, 123456789, 1000, ind, erk, ig_szam);
-		helyjegy = new Helyjegy(200, 987654321, 1000, ind, erk, 100, 1);
-	}
+	void buyTicket();
+	void buyStudentTicket();
 
 	void eladottJegyek(std::ostream& os) const { os << "jegyek listázása"; }
 };

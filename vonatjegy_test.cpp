@@ -20,8 +20,11 @@ int main() {
 	SetConsoleOutputCP(1250);
 #endif
 
-	//tesztek ide
+	Tarsasag t;
+	t.addVonat();
 
+#ifdef TESZTEK
+	//tesztek ide
 	//-------- Társaság class tesztjei
 	Tarsasag t; //késõbb is kelleni fog
 	List<Allomas> allomasok;
@@ -96,6 +99,8 @@ int main() {
 		EXPECT_EQ(1, k.getHely());
 		EXPECT_EQ(100, k.getKocsiSzam());
 	} END;
+
+#endif //!TESZTEK
 	
 	std::cout << "\nA kód lefutott, Enter a bezáráshoz";
 	std::cin.get();
