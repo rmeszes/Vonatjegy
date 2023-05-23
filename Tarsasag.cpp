@@ -3,8 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include <ios> //used to get stream size
-#include <limits> //used to get numeric limits
+#include <iomanip>
 
 #include "memtrace.h"
 
@@ -47,6 +46,7 @@ void Tarsasag::addVonat() {
 
 	String buffer;
 	char mini_buff;
+	cout << '\t';
 	cin.get(mini_buff);
 	while (mini_buff != '\n') { // egy állomásnak a nevében lehet space, ezért tovább kell olvassuk eof-ig
 		buffer = buffer + mini_buff;
@@ -54,39 +54,35 @@ void Tarsasag::addVonat() {
 	}
 	while (buffer.c_str()[0] != '#' || allomasok_size < 2) {
 		if (buffer.c_str()[0] == '#') {
-			cout << "Legalabb 2 allomast hozza kell adni!" << std::endl;
+			cout << "\tLegalabb 2 allomast hozza kell adni!" << std::endl;
 		}
 		else {
-			allomasok.push_back(Allomas(buffer, String()));
-			allomasok_size++;
+			if (buffer.size() > 0) {
+				allomasok.push_back(Allomas(buffer, String()));
+				allomasok_size++;
+			}
 		}
 		buffer = String();
+		cout << '\t';
 		cin.get(mini_buff);
 		while (mini_buff != '\n') { // egy állomásnak a nevében lehet space, ezért tovább kell olvassuk eof-ig
 			buffer = buffer + mini_buff;
 			cin.get(mini_buff);
 		}
 	}
-	
 	vonatok.push_back(Vonat(vonatszam++, kocsik_szama, helyek_szama, ar, allomasok));
 }
 
+void Tarsasag::listVonatok(std::ostream& os) //TODO const_iterator
+{
+	os << "Vonatok listaja:\n";
+	os << std::left << std::setw(4) << std::setfill(' ') << "Vonat" << " | ";
+	os << std::left << std::setw(7) << std::setfill(' ') << "Alap ar" << " | ";
+	os << std::endl;
 
-/*while (helyek_szama == 0) {
-		cout << "\tHelyek szama: ";
-		bool valid = true;
-		cin >> buffer;
-		for (size_t i = 0; buffer.size(); i++) {
-			if (!isdigit(buffer.c_str()[i])) valid = false;
-			if (valid == false) break; // ha már invalid ne fusson végig
-		}
-		if (valid == true) { // ha az összes elem szám, jöhet
-			helyek_szama = (size_t)atoi(buffer.c_str());
-		}
-		else {
-			cout << "\tHibas bemenet! (" << buffer << ")\n";
-		}
-		if (!cin.eof()) {
-			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //mivel a String osztály csak wspace-ig olvas, eldobjuk a többit
-		}
-	}*/
+	for (auto& it : vonatok) {
+		os << std::left << std::setw(4) << std::setfill(' ') << it.getVonatSzam() << " | ";
+		os << std::right << std::setw(7) << std::setfill(' ') << it.getAr() << "Ft";
+		os << std::endl;
+	}
+}

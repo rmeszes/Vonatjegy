@@ -22,6 +22,7 @@ int main() {
 
 	Tarsasag t;
 	t.addVonat();
+	t.listVonatok(std::cout);
 
 #ifdef TESZTEK
 	//tesztek ide

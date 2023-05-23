@@ -17,7 +17,7 @@ public:
 
 	void addVonat();
 
-	void listVonatok(std::ostream& os) const { os << "vonatok listája"; }
+	void listVonatok(std::ostream& os); //TODO const
 
 	void buyTicket();
 	void buyStudentTicket();
