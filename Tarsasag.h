@@ -11,7 +11,7 @@ class Tarsasag {
 	int jegyszam;
 	int vonatszam;
 	List<Vonat> vonatok;
-	List<SmartPtr<Jegy>> eladott_jegyek;
+	List<std::shared_ptr<Jegy>> eladott_jegyek;
 
 	Vonat& findVonat();
 public:

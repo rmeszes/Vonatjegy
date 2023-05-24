@@ -47,6 +47,8 @@ class Vonat {
 public:
 	Vonat(int vonat_szam = 0, size_t kocsik_szama = 0, size_t helyek_szama = 0, double ar = 0, List<Allomas>& allomasok = List<Allomas>());
 
+	Vonat(const Vonat& original);
+
 	int getVonatSzam() const { return vonat_szam; }
 	int getAr() const { return ar; }
 

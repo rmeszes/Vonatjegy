@@ -49,12 +49,17 @@ int Kocsi::getHely() const
 }
 
 Vonat::Vonat(int vonat_szam, size_t kocsik_szama, size_t helyek_szama, double ar, List<Allomas>& allomasok)
-	:vonat_szam(vonat_szam), kocsik_szama(kocsik_szama), ar(ar), allomasok(allomasok)
+	:vonat_szam(vonat_szam), kocsik_szama(kocsik_szama), ar(ar), kocsik(), allomasok(allomasok)
 {
 	for (size_t i = 0; i < kocsik_szama; i++) //elkészítjük a kocsikat
 	{
 		kocsik.push_back(Kocsi(100 + i, helyek_szama));
 	}
+}
+
+Vonat::Vonat(const Vonat& original) 
+	:vonat_szam(original.vonat_szam), kocsik_szama(original.kocsik_szama), ar(original.ar), kocsik(original.kocsik), allomasok(original.allomasok)
+{
 }
 
 /// <summary>
@@ -63,17 +68,17 @@ Vonat::Vonat(int vonat_szam, size_t kocsik_szama, size_t helyek_szama, double ar
 /// <param name="ret">2 méretû tömb, ennek az elsõ helyére kerül a kocsiszám, a másodikba a hely szám</param>
 void Vonat::findSeat(int* ret)
 {
-	List<Kocsi>::iterator it = kocsik.begin();
 	int hely = 0;
-	while (it != kocsik.end()) { 
-		hely = it->getHely(); //megpróbál helyet kapni egy kocsin
+	auto& kocsi = kocsik.begin();
+	while(kocsi != kocsik.end()) {
+		hely = kocsi->getHely(); //megpróbál helyet kapni egy kocsin
 		if (hely != 0) break;
-		it++;
+		kocsi++;
 	}
 	if (hely != 0) { //ha talált, a tömbbe teszem a kocsiszámot és hely számát
-		ret[0] = it->getKocsiSzam();
+		ret[0] = kocsi->getKocsiSzam();
 		ret[1] = hely;
-		std::cout << "Kiadtuk a " << it->getKocsiSzam() << ". számú kocsi " << hely << ". számú ülését." << std::endl;
+		std::cout << "Kiadtuk a " << kocsi->getKocsiSzam() << ". számú kocsi " << hely << ". számú ülését." << std::endl;
 	}
 	else {
 		ret[0] = 0; ret[1] = 0; //ha nem, akkor 0

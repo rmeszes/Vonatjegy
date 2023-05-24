@@ -22,9 +22,14 @@ int main() {
 
 	Tarsasag t;
 	t.addVonat();
-	t.listVonatok(std::cout);
 
-	t.buyTicket();
+	SmartPtr<Jegy> menetjegy, helyjegy;
+
+
+	t.buyTicket(menetjegy, helyjegy);
+
+	menetjegy->kiir();
+	helyjegy->kiir();
 
 #ifdef TESZTEK
 	//tesztek ide

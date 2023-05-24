@@ -7,7 +7,6 @@ template<typename T>
 class SmartPtr
 {
 	T* ptr;
-	SmartPtr(const SmartPtr&);
 public:
 	explicit SmartPtr(T* p = nullptr) :ptr(p) {}
 
