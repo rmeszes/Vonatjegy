@@ -26,6 +26,7 @@ int main() {
 	menu.addItem(String("Uj vonat hozzadasa"), [&tarsasag]() {tarsasag.addVonat(); });
 	menu.addItem(String("Vonatok kilistazasa"), [&tarsasag]() {tarsasag.listVonatok(); });
 	menu.addItem(String("Teljesaru jegy vasarlasa"), [&tarsasag]() {tarsasag.buyTicket(); });
+	menu.addItem(String("Diakjegy vasarlasa"), [&tarsasag]() {tarsasag.buyStudentTicket(); });
 	menu.display();
 	
 
