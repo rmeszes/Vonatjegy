@@ -41,7 +41,7 @@ public:
 	int getszam() const { return szam; }
 	int getVonat() const { return vonat; }
 	void kiir(std::ostream& os = std::cout) const {
-		os << "Diakjegy\n\t" << allomas1 << " - " << allomas2 << "\n\t" << ind_ido << " - " << erk_ido << std::endl << "Diakigazolvany szam: " << ig_szam << std::endl;
+		os << "Diakjegy\n\t" << allomas1 << " - " << allomas2 << "\n\t" << ind_ido << " - " << erk_ido << std::endl << "\tDiakigazolvany szam: " << ig_szam << std::endl;
 	}
 };
 
@@ -53,7 +53,7 @@ public:
 	int getszam() const { return szam; }
 	int getVonat() const { return vonat; }
 	void kiir(std::ostream& os = std::cout) const {
-		os << "Helyjegy\n\t" << allomas1 << " - " << allomas2 << "\n\t" << ind_ido << " - " << erk_ido << std::endl << "Kocsi: " << kocsi << " Hely: " << hely << std::endl;
+		os << "Helyjegy\n\t" << allomas1 << " - " << allomas2 << "\n\t" << ind_ido << " - " << erk_ido << std::endl << "\tKocsi: " << kocsi << " Hely: " << hely << std::endl;
 	}
 };
 

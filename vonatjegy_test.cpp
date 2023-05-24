@@ -24,6 +24,8 @@ int main() {
 	Tarsasag tarsasag;
 	Menu menu;
 	menu.addItem(String("Uj vonat hozzadasa"), [&tarsasag]() {tarsasag.addVonat(); });
+	menu.addItem(String("Vonatok kilistazasa"), [&tarsasag]() {tarsasag.listVonatok(); });
+	menu.addItem(String("Teljesaru jegy vasarlasa"), [&tarsasag]() {tarsasag.buyTicket(); });
 	menu.display();
 	
 
@@ -105,8 +107,5 @@ int main() {
 	} END;
 
 #endif //!TESZTEK
-	
-	std::cout << "\nA kód lefutott, Enter a bezáráshoz";
-	std::cin.get();
 	return 0;
 }

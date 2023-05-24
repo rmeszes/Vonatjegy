@@ -12,6 +12,8 @@
 using std::cout;
 using std::cin;
 
+
+size_t getnum(const char* bekert_adat, size_t max = SIZE_MAX, size_t min = 0);
 class Menu
 {
 	struct MenuItem { // 2 elem összekötésére szolgál csak
@@ -26,25 +28,22 @@ public:
 	}
 
 	void display() {
-		int choice;
+		size_t choice;
 		while (true) {
 			std::cout << "MENU\n";
 			for (size_t i = 0; i < menuItems.size(); ++i) {
 				std::cout << i + 1 << ". " << menuItems[i].label << std::endl;
 			}
-			std::cout << "0. Kilepes" << std::endl;
+			std::cout << (menuItems.size() + 1) << ". Kilepes" << std::endl;
 
-			std::cout << "Valasztott menupont: ";
-			std::cin >> choice;
-			char ch = '\0';
-			while (ch != '\n') cin.get(ch);
+			choice = getnum("Valasztott menupont: ", (menuItems.size() + 1));
 
-			if (choice < 0 || choice > menuItems.size()) {
+			if (choice < 0 || choice > (menuItems.size() + 1)) {
 				std::cout << "Ervenytelen valasztas" << std::endl;
 				continue;
 			}
 
-			if (choice == 0) {
+			if (choice == (menuItems.size() + 1)) {
 				break;
 			}
 

@@ -19,9 +19,9 @@ public:
 
 	void addVonat();
 
-	void listVonatok(std::ostream& os); //TODO const
+	void listVonatok(std::ostream& os = std::cout); 
 
-	void buyTicket(SmartPtr<Jegy>& menetjegy, SmartPtr<Jegy>& helyjegy);
+	void buyTicket(SmartPtr<Jegy>& menetjegy = SmartPtr<Jegy>(), SmartPtr<Jegy>& helyjegy = SmartPtr<Jegy>());
 	void buyStudentTicket(SmartPtr<Jegy>& menetjegy, SmartPtr<Jegy>& helyjegy);
 
 	void eladottJegyek(std::ostream& os) const { os << "jegyek listázása"; }
