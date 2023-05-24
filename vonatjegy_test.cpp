@@ -24,6 +24,8 @@ int main() {
 	t.addVonat();
 	t.listVonatok(std::cout);
 
+	t.buyTicket();
+
 #ifdef TESZTEK
 	//tesztek ide
 	//-------- Társaság class tesztjei

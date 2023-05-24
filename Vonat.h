@@ -50,6 +50,14 @@ public:
 	int getVonatSzam() const { return vonat_szam; }
 	int getAr() const { return ar; }
 
+	String& induloAll()  { return allomasok.front().nev; }
+	String& vegallomas() { return allomasok.back().nev; }
+
+	String& indIdo() { return allomasok.front().ido; }
+	String& erkIdo() { return allomasok.back().ido; }
+
+	List<Allomas>& getAllomasok() { return allomasok; }
+
 	void findSeat(int* ret);
 };
 #endif // !VONAT_H

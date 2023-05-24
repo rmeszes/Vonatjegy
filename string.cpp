@@ -138,3 +138,14 @@ std::istream& operator>>(std::istream& is, String& s) {
     }
     return is;
 }
+
+void String::getline(std::istream& is) {
+    char ch;
+    *this = "";
+    while (is.get(ch)) {
+        if (ch == '\n' || ch == '\0') break;
+        else {
+            *this = *this + ch;
+        }
+    }
+}

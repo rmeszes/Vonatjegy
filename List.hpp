@@ -64,6 +64,14 @@ public:
 
     bool empty() const { return(sentinel_begin == nullptr); }
 
+    T& front() {
+        return sentinel_begin->data;
+    }
+
+    T& back() {
+        return sentinel_end->data;
+    }
+
     class iterator {
         ListElement *curr;
     public:

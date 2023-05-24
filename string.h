@@ -38,7 +38,7 @@ public:
 
     ~String();
 
-    String(const char);
+    explicit String(const char);
 
     String(const char*);
 
@@ -49,6 +49,9 @@ public:
     String& operator=(const String);
 
     char& operator[](size_t idx) const;
+
+    void getline(std::istream& is = std::cin);
+
 
 }; /// Itt az osztály deklarációjának vége
 

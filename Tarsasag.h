@@ -12,6 +12,8 @@ class Tarsasag {
 	int vonatszam;
 	List<Vonat> vonatok;
 	List<SmartPtr<Jegy>> eladott_jegyek;
+
+	Vonat& findVonat();
 public:
 	Tarsasag() :jegyszam(1000000), vonatszam(1000) {}
 
@@ -19,8 +21,8 @@ public:
 
 	void listVonatok(std::ostream& os); //TODO const
 
-	void buyTicket();
-	void buyStudentTicket();
+	void buyTicket(SmartPtr<Jegy>& menetjegy, SmartPtr<Jegy>& helyjegy);
+	void buyStudentTicket(SmartPtr<Jegy>& menetjegy, SmartPtr<Jegy>& helyjegy);
 
 	void eladottJegyek(std::ostream& os) const { os << "jegyek listázása"; }
 };
