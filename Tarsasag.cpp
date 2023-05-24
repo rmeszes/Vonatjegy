@@ -42,7 +42,6 @@ size_t getnum(const char* bekert_adat, size_t max = SIZE_MAX, size_t min = 0) {
 		else {
 			cout << "Hibas bemenet! (" << buffer << ")\n";
 		}
-		// TODO solve throwing away the buffer, only if its not empty
 	}
 	return ret;
 }
@@ -130,7 +129,7 @@ Vonat& Tarsasag::findVonat() {
 	return *result;
 }
 
-void Tarsasag::buyTicket(SmartPtr<Jegy>& menetjegy, SmartPtr<Jegy>& helyjegy) 
+void Tarsasag::buyTicket(SmartPtr<Jegy>& menetjegy = SmartPtr<Jegy>(), SmartPtr<Jegy>& helyjegy = SmartPtr<Jegy>())
 {
 	cout << "Jegyvasarlas\n";
 	listVonatok(cout);
@@ -169,6 +168,10 @@ void Tarsasag::buyTicket(SmartPtr<Jegy>& menetjegy, SmartPtr<Jegy>& helyjegy)
 
 		eladott_jegyek.push_back(std::shared_ptr<Jegy>(new Menetjegy(vonat.getAr(), jegyszam - 2, vonat.getVonatSzam(), *ind_all, *erkezesi_all))); //a jegyek egy copyját eltárolja magának az objektum
 		eladott_jegyek.push_back(std::shared_ptr<Jegy>(new Helyjegy(vonat.getAr(), jegyszam-1, vonat.getVonatSzam(), *ind_all, *erkezesi_all, hely[0], hely[1])));
+
+		cout << "Az eladott jegyek:\n";
+		menetjegy->kiir();
+		helyjegy->kiir();
 	}
 	else { // ha nincs hely a vonaton
 		cout << "Sajnos a vonaton nem maradt hely!";

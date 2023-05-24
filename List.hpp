@@ -10,10 +10,11 @@ template<class T> class List
 		ListElement(const T& data, ListElement* prev = nullptr, ListElement* next = nullptr) :data(data), prev(prev), next(next) {}
 	};
     ListElement* sentinel_begin, *sentinel_end;
+    size_t num_of_elements;
 public:
-    List() :sentinel_begin(nullptr), sentinel_end(nullptr) {}
+    List() :sentinel_begin(nullptr), sentinel_end(nullptr), num_of_elements(0) {}
 
-    List(const List& origin) {
+    List(const List& origin) :num_of_elements(origin.num_of_elements) {
         if (origin.sentinel_begin == nullptr) { //megnézzük, hogy az origin lista üres-e
             sentinel_begin = nullptr;
             sentinel_end = nullptr;
@@ -50,6 +51,7 @@ public:
             sentinel_end->next = new ListElement(data, sentinel_end); //az új elemet beadja az utolsó után
             sentinel_end = sentinel_end->next; //a sentinelt az új elemre állítjuk
         }
+        num_of_elements++;
     }
 
     void push_front(const T& data) {
@@ -60,9 +62,12 @@ public:
             sentinel_begin->prev = new ListElement(data, nullptr, sentinel_begin); //az új elemet beadja az utolsó után
             sentinel_begin = sentinel_begin->prev; //a sentinelt az új elemre állítjuk
         }
+        num_of_elements++;
     }
 
-    bool empty() const { return(sentinel_begin == nullptr); }
+    bool empty() const { return(num_of_elements == 0); }
+
+    size_t size() const { return num_of_elements; }
 
     T& front() {
         return sentinel_begin->data;
@@ -121,6 +126,20 @@ public:
 
     iterator end() {
         return(iterator());
+    }
+
+    T& operator[](const size_t idx) {
+        if (idx >= size()) throw std::out_of_range("index out of range");
+        ListElement* it = sentinel_begin;
+        for (size_t i = 0; i < idx; i++) it = it->next;
+        return it->data;
+    }
+
+    T operator[](const size_t idx) const {
+        if (idx >= size()) throw std::out_of_range("index out of range");
+        ListElement* it = sentinel_begin;
+        for (size_t i = 0; i < idx; i++) it = it->next;
+        return it->data;
     }
 };
 

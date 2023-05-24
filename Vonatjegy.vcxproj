@@ -109,6 +109,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="memtrace.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="string.cpp" />
     <ClCompile Include="Tarsasag.cpp" />
     <ClCompile Include="Vonat.cpp" />
@@ -119,6 +120,7 @@
     <ClInclude Include="Jegy.h" />
     <ClInclude Include="List.hpp" />
     <ClInclude Include="memtrace.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="SmartPtr.hpp" />
     <ClInclude Include="string.h" />
     <ClInclude Include="Tarsasag.h" />

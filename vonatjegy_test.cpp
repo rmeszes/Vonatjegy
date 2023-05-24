@@ -12,6 +12,7 @@
 #include "SmartPtr.hpp"
 #include "Tarsasag.h"
 #include "Jegy.h"
+#include "Menu.h"
 
 int main() {
 	//A windowsban a megfelelõ megjelenítéshez
@@ -20,16 +21,11 @@ int main() {
 	SetConsoleOutputCP(1250);
 #endif
 
-	Tarsasag t;
-	t.addVonat();
-
-	SmartPtr<Jegy> menetjegy, helyjegy;
-
-
-	t.buyTicket(menetjegy, helyjegy);
-
-	menetjegy->kiir();
-	helyjegy->kiir();
+	Tarsasag tarsasag;
+	Menu menu;
+	menu.addItem(String("Uj vonat hozzadasa"), [&tarsasag]() {tarsasag.addVonat(); });
+	menu.display();
+	
 
 #ifdef TESZTEK
 	//tesztek ide
