@@ -1,5 +1,4 @@
 #include <iostream>
-#include <Windows.h>
 #include <sstream>
 
 #include "memtrace.h"
@@ -15,11 +14,7 @@
 #include "Menu.h"
 
 int main() {
-	//A windowsban a megfelelõ megjelenítéshez
-#if defined(WIN32) || defined(_WIN32) || defined(WIN64) || defined(_WIN64)
-	SetConsoleCP(1250);
-	SetConsoleOutputCP(1250);
-#endif
+
 
 	Tarsasag tarsasag;
 	Menu menu;

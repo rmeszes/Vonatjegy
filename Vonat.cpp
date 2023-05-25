@@ -52,7 +52,7 @@ int Kocsi::getHely() const
 }
 
 Vonat::Vonat(int vonat_szam, size_t kocsik_szama, size_t helyek_szama, double ar, List<Allomas> allomasok)
-	:vonat_szam(vonat_szam), kocsik_szama(kocsik_szama), ar(ar), kocsik(), allomasok(allomasok)
+	:vonat_szam(vonat_szam), kocsik_szama(kocsik_szama), ar(ar), allomasok(allomasok), kocsik()
 {
 	for (size_t i = 0; i < kocsik_szama; i++) //elkészítjük a kocsikat
 	{
@@ -61,7 +61,7 @@ Vonat::Vonat(int vonat_szam, size_t kocsik_szama, size_t helyek_szama, double ar
 }
 
 Vonat::Vonat(const Vonat& original) 
-	:vonat_szam(original.vonat_szam), kocsik_szama(original.kocsik_szama), ar(original.ar), kocsik(original.kocsik), allomasok(original.allomasok)
+	:vonat_szam(original.vonat_szam), kocsik_szama(original.kocsik_szama), ar(original.ar), allomasok(original.allomasok), kocsik(original.kocsik)
 {
 }
 
