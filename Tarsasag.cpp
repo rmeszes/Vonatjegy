@@ -147,7 +147,7 @@ void Tarsasag::buyTicket()
 		if (hely[0] != 0) { //ha van hely a vonaton
 			cout << "Kerlek valassz indulo allomast!\n";
 			size_t i = 0; // ebben számoljuk a kiírt állomások mennyiségét
-			for (auto& it : vonat.getAllomasok()) {
+			for (const auto& it : vonat.getAllomasok()) {
 				cout << i + 1 << " " << std::left << std::setw(20) << std::setfill(' ') << it.nev << it.ido << std::endl;
 				++i;
 			}
@@ -205,7 +205,7 @@ void Tarsasag::buyStudentTicket()
 		if (hely[0] != 0) { //ha van hely a vonaton
 			cout << "Kerlek valassz indulo allomast!\n";
 			size_t i = 0; // ebben számoljuk a kiírt állomások mennyiségét
-			for (auto& it : vonat.getAllomasok()) {
+			for (const auto& it : vonat.getAllomasok()) {
 				cout << i + 1 << " " << std::left << std::setw(20) << std::setfill(' ') << it.nev << it.ido << std::endl;
 				++i;
 			}

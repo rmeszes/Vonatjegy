@@ -3,7 +3,6 @@
 
 #include "memtrace.h"
 #include "string.h"
-#include "SmartPtr.hpp"
 #include "Vonat.h"
 #include "Jegy.h"
 

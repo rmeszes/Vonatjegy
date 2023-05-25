@@ -121,7 +121,6 @@
     <ClInclude Include="List.hpp" />
     <ClInclude Include="memtrace.h" />
     <ClInclude Include="Menu.h" />
-    <ClInclude Include="SmartPtr.hpp" />
     <ClInclude Include="string.h" />
     <ClInclude Include="Tarsasag.h" />
     <ClInclude Include="Vonat.h" />

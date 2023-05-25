@@ -4,7 +4,6 @@
 #include "memtrace.h"
 #include "List.hpp"
 #include "string.h"
-#include "SmartPtr.hpp"
 
 class Kocsi {
 	int kocsi_szam;
