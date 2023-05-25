@@ -6,8 +6,8 @@ template<class T> class List
 {
 	struct ListElement {
 		T data;
-		ListElement *next, *prev;
-		ListElement(const T& data, ListElement* prev = nullptr, ListElement* next = nullptr) :data(data), prev(prev), next(next) {}
+		ListElement * prev, *next;
+		explicit ListElement(const T& data, ListElement* prev = nullptr, ListElement* next = nullptr) :data(data), prev(prev), next(next) {}
 	};
     ListElement* sentinel_begin, *sentinel_end;
     size_t num_of_elements;
@@ -81,7 +81,7 @@ public:
         ListElement *curr;
     public:
         iterator() :curr(nullptr) {}; //végére állítja az iterátort
-        iterator(const List& l) :curr(l.sentinel_begin) {}
+        explicit iterator(const List& l) :curr(l.sentinel_begin) {}
         iterator& operator++() { //pre
             if (curr != nullptr) {
                 curr = curr->next;

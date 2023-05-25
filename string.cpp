@@ -68,7 +68,10 @@ String::~String() {
 }
 
 /// operator=
-String& String::operator=(const String s) {
+String& String::operator=(const String& s) {
+    if (this == &s) {
+        return *this;
+    }
     len = s.len;
     delete[] pData;
     pData = new char[len + 1];
@@ -108,7 +111,7 @@ String operator+(const String& a, const String& b) {
     return res;
 }
 
-String operator+(const char c, String& s) {
+String operator+(const char c, const String& s) {
     size_t string_size = s.size();
     char* temp = new char[string_size + 2];
     temp[0] = c;
@@ -141,7 +144,7 @@ std::istream& operator>>(std::istream& is, String& s) {
 
 void String::getline(std::istream& is) {
     char ch;
-    *this = "";
+    *this = String("");
     while (is.get(ch)) {
         if (ch == '\n' || ch == '\0') break;
         else {

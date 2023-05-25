@@ -23,6 +23,7 @@ int main() {
 
 	Tarsasag tarsasag;
 	Menu menu;
+	SmartPtr<Jegy> utoljara_kiadott_menetjegy, utoljara_kiadott_helyjegy;
 	menu.addItem(String("Uj vonat hozzadasa"), [&tarsasag]() {tarsasag.addVonat(); });
 	menu.addItem(String("Vonatok kilistazasa"), [&tarsasag]() {tarsasag.listVonatok(); });
 	menu.addItem(String("Teljesaru jegy vasarlasa"), [&tarsasag]() {tarsasag.buyTicket(); });
