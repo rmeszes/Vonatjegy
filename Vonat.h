@@ -44,7 +44,7 @@ class Vonat {
 	List<Allomas> allomasok;
 	List<Kocsi> kocsik;
 public:
-	explicit Vonat(int vonat_szam = 0, size_t kocsik_szama = 0, size_t helyek_szama = 0, double ar = 0, List<Allomas> allomasok = List<Allomas>());
+	explicit Vonat(int vonat_szam, size_t kocsik_szama, size_t helyek_szama, double ar, List<Allomas>& allomasok);
 
 	Vonat(const Vonat& original);
 

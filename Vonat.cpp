@@ -1,7 +1,7 @@
 //függvény definíciók ide
 #include "Vonat.h"
 
-Kocsi::Kocsi(int kocsi_szam = 0, size_t helyek_szama = 0) :kocsi_szam(kocsi_szam), helyek_szama(helyek_szama) {
+Kocsi::Kocsi(int kocsi_szam, size_t helyek_szama) :kocsi_szam(kocsi_szam), helyek_szama(helyek_szama) {
 	if (helyek_szama == 0) { helyek = nullptr; }
 	else { helyek = new bool[helyek_szama]; }
 	for (size_t i = 0; i < helyek_szama; i++) //inicializálom a tömb elemeit, hogy biztosan false legyen
@@ -51,7 +51,7 @@ int Kocsi::getHely() const
 	return 0;
 }
 
-Vonat::Vonat(int vonat_szam, size_t kocsik_szama, size_t helyek_szama, double ar, List<Allomas> allomasok)
+Vonat::Vonat(int vonat_szam, size_t kocsik_szama, size_t helyek_szama, double ar, List<Allomas>& allomasok)
 	:vonat_szam(vonat_szam), kocsik_szama(kocsik_szama), ar(ar), allomasok(allomasok), kocsik()
 {
 	for (size_t i = 0; i < kocsik_szama; i++) //elkészítjük a kocsikat

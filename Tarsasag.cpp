@@ -153,7 +153,7 @@ void Tarsasag::buyTicket()
 			}
 			size_t valasztott_all = getnum("Valasztott allomas sorszama: ", i - 1, 1) - 1; //az állomás sorszáma nem lehet az utolsó, vagy nagyobb, -1 az index miatt
 			auto ind_all = vonat.getAllomasok().begin(); // ebben tároljuk, hogy majd melyik állomás lesz az induló
-			double haladott_allomasok = 1;
+			double haladott_allomasok = 0;
 			for (size_t j = 0; j != valasztott_all; j++) {
 				++ind_all; //addig léptetjük az állomásokon, amíg el nem ér a választott indexre
 			}
@@ -183,7 +183,7 @@ void Tarsasag::buyTicket()
 
 		}
 		else { // ha nincs hely a vonaton
-			cout << "Sajnos a vonaton nem maradt hely!";
+			cout << "Sajnos a vonaton nem maradt hely!\n";
 		}
 	}
 }
@@ -211,7 +211,7 @@ void Tarsasag::buyStudentTicket()
 			}
 			size_t valasztott_all = getnum("Valasztott allomas sorszama: ", i - 1, 1) - 1; //az állomás sorszáma nem lehet az utolsó, vagy nagyobb, -1 az index miatt
 			auto ind_all = vonat.getAllomasok().begin(); // ebben tároljuk, hogy majd melyik állomás lesz az induló
-			double haladott_allomasok = 1;
+			double haladott_allomasok = 0;
 			for (size_t j = 0; j != valasztott_all; j++) {
 				++ind_all; //addig léptetjük az állomásokon, amíg el nem ér a választott indexre
 			}
