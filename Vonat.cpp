@@ -81,7 +81,6 @@ void Vonat::findSeat(int* ret)
 	if (hely != 0) { //ha talált, a tömbbe teszem a kocsiszámot és hely számát
 		ret[0] = kocsi->getKocsiSzam();
 		ret[1] = hely;
-		std::cout << "Kiadtuk a " << kocsi->getKocsiSzam() << ". számú kocsi " << hely << ". számú ülését." << std::endl;
 	}
 	else {
 		ret[0] = 0; ret[1] = 0; //ha nem, akkor 0

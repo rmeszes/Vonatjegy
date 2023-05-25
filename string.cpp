@@ -111,17 +111,6 @@ String operator+(const String& a, const String& b) {
     return res;
 }
 
-String operator+(const char c, const String& s) {
-    size_t string_size = s.size();
-    char* temp = new char[string_size + 2];
-    temp[0] = c;
-    temp[1] = '\0';
-    strcat(temp, s.c_str());
-    String res = String(temp);
-    delete[] temp;
-    return res;
-}
-
 /// << operator, ami kiír az ostream-re
 std::ostream& operator<<(std::ostream& os, const String& s) {
     return os << s.c_str();

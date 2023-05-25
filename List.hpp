@@ -54,17 +54,6 @@ public:
         num_of_elements++;
     }
 
-    void push_front(const T& data) {
-        if (sentinel_begin == nullptr) {
-            sentinel_begin = sentinel_end = new ListElement(data);
-        }
-        else {
-            sentinel_begin->prev = new ListElement(data, nullptr, sentinel_begin); //az új elemet beadja az utolsó után
-            sentinel_begin = sentinel_begin->prev; //a sentinelt az új elemre állítjuk
-        }
-        num_of_elements++;
-    }
-
     bool empty() const { return(num_of_elements == 0); }
 
     size_t size() const { return num_of_elements; }

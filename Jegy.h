@@ -32,7 +32,7 @@ public:
 	void kiir(std::ostream& os = std::cout) const override {
 		os << "Jegyszam: " << szam << std::endl;
 		os << "Menetjegy\n\t" << allomas1 << " - " << allomas2 << "\n\t" << ind_ido << " - " << erk_ido << std::endl;
-		os << "Ar: " << getAr() << std::endl;
+		os << "Ar: " << getAr() << "Ft" << std::endl;
 	}
 	~Menetjegy() {}
 };
@@ -47,7 +47,7 @@ public:
 	void kiir(std::ostream& os = std::cout) const override {
 		os << "Jegyszam: " << szam << std::endl;
 		os << "Diakjegy\n\t" << allomas1 << " - " << allomas2 << "\n\t" << ind_ido << " - " << erk_ido << std::endl << "\tDiakigazolvany szam: " << ig_szam << std::endl;
-		os << "Ar: " << getAr() << std::endl;
+		os << "Ar: " << getAr() << "Ft" << std::endl;
 	}
 };
 
@@ -61,7 +61,7 @@ public:
 	void kiir(std::ostream& os = std::cout) const override {
 		os << "Jegyszam: " << szam << std::endl;
 		os << "Helyjegy\n\t" << allomas1 << " - " << allomas2 << "\n\t" << ind_ido << " - " << erk_ido << std::endl << "\tKocsi: " << kocsi << " Hely: " << hely << std::endl;
-		os << "Ar: " << getAr() << std::endl;
+		os << "Ar: " << getAr() << "Ft" << std::endl;
 	}
 };
 

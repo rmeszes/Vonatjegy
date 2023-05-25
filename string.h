@@ -16,15 +16,6 @@ class String {
     char *pData;        ///< pointer az adatra
     size_t len;         ///< hossz lezáró nulla nélkül
 public:
-/// Kiírunk egy Stringet (debug célokra)
-/// Ezt a tagfüggvényt elkészítettük, hogy használja a hibák felderítéséhez.
-/// Igény szerint módosítható
-/// @param txt - nullával lezárt szövegre mutató pointer.
-///              Ezt a szöveget írjuk ki a debug információ előtt.
-    void printDbg(const char *txt = "") const {
-        std::cout << txt << "[" << len << "], "
-                  << (pData ? pData : "(NULL)") << '|' << std::endl;
-    }
     /// Paraméter nélküli konstruktor:
     String();
 
@@ -50,7 +41,7 @@ public:
 
     char& operator[](size_t idx) const;
 
-    void getline(std::istream& is = std::cin);
+    void getline(std::istream& is);
 
 
 }; /// Itt az osztály deklarációjának vége
@@ -59,7 +50,6 @@ public:
 /// ...
 String operator+(const String&, const String&);
 String operator+(const String&, const char);
-String operator+(const char, String&);
 
 std::ostream& operator<<(std::ostream&, const String&);
 

@@ -9,8 +9,15 @@
 
 #include "memtrace.h"
 
-using std::cin;
 using std::cout;
+//#define CPORTA
+#if defined(CPORTA)
+	//std::ifstream cin("test.txt");
+	//std::ofstream nullStream("nul");
+	//std::streambuf* oldBuffer = std::cout.rdbuf(nullStream.rdbuf());
+ 
+	using std::cin;
+#endif
 
 /// <summary>
 /// Egy szam bekérésére szolgál
@@ -23,7 +30,7 @@ size_t getnum(const char* bekert_adat, size_t max = SIZE_MAX, size_t min = 0) {
 	while (ret == 0) {
 		cout << bekert_adat;
 		bool valid = true;
-		buffer.getline();
+		buffer.getline(cin);
 		for (size_t i = 0; i < buffer.size(); i++) {
 			if (!isdigit(buffer.c_str()[i])) valid = false;
 			if (valid == false) break; // ha már invalid ne fusson végig
@@ -55,12 +62,12 @@ void Tarsasag::addVonat() {
 	
 	int ar = getnum("A vonat alapara allomasonkent: ");
 
-	cout << "A vonat allomasai, enterrel elvalasztva, # a bejezezõ karakter\n";
+	cout << "A vonat allomasai, enterrel elvalasztva, # a befejezo karakter\n";
 	List<Allomas> allomasok;
 	size_t allomasok_size = 0;
 
 	String buffer;
-	buffer.getline();
+	buffer.getline(cin);
 	while (buffer.c_str()[0] != '#' || allomasok_size < 2) {
 		if (buffer.c_str()[0] == '#') {
 			cout << "Legalabb 2 allomast hozza kell adni!" << std::endl;
@@ -71,7 +78,7 @@ void Tarsasag::addVonat() {
 				allomasok_size++;
 			}
 		}
-		buffer.getline();
+		buffer.getline(cin);
 	}
 
 	cout << "Indulasi/erkezesi idok\n";
@@ -83,7 +90,7 @@ void Tarsasag::addVonat() {
 		else {
 			cout << "Erkezes (" << it->nev << "): ";
 		}
-		buffer.getline();
+		buffer.getline(cin);
 		it->ido = buffer;
 		++it;
 	}
@@ -197,7 +204,7 @@ void Tarsasag::buyStudentTicket()
 		cout << "Jegyvasarlas\n";
 		String ig_szam;
 		cout << "Kerlek add meg a diakigazolvany szamod: ";
-		ig_szam.getline();
+		ig_szam.getline(cin);
 		listVonatok(cout);
 		Vonat& vonat = findVonat();
 		int hely[2];
@@ -253,7 +260,7 @@ void Tarsasag::eladottJegyek(std::ostream& os)
 	else {
 		cout << "Eladott jegyek:\n";
 		for (auto& it : eladott_jegyek) {
-			it->kiir();
+			it->kiir(os);
 		}
 	}
 }
