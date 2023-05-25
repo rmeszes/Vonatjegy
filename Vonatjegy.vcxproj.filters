@@ -50,9 +50,6 @@
     <ClInclude Include="string.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SmartPtr.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Jegy.h">
       <Filter>Header Files</Filter>
     </ClInclude>

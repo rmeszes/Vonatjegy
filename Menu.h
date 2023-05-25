@@ -27,30 +27,7 @@ public:
 		menuItems.push_back({ label,action });
 	}
 
-	void display() {
-		size_t choice;
-		while (true) {
-			std::cout << "MENU\n";
-			for (size_t i = 0; i < menuItems.size(); ++i) {
-				std::cout << i + 1 << ". " << menuItems[i].label << std::endl;
-			}
-			std::cout << (menuItems.size() + 1) << ". Kilepes" << std::endl;
-
-			choice = getnum("Valasztott menupont: ", (menuItems.size() + 1));
-
-			if (choice < 0 || choice > (menuItems.size() + 1)) {
-				std::cout << "Ervenytelen valasztas" << std::endl;
-				continue;
-			}
-
-			if (choice == (menuItems.size() + 1)) {
-				break;
-			}
-
-			// Call the selected menu item's action
-			menuItems[choice - 1].action();
-		}
-	}
+	void display();
 };
 
 #endif //MENU_HU

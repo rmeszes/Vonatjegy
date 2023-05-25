@@ -20,6 +20,9 @@ Kocsi::Kocsi(const Kocsi& k) :kocsi_szam(k.kocsi_szam), helyek_szama(k.helyek_sz
 
 Kocsi& Kocsi::operator=(const Kocsi& k)
 {
+	if (this == &k) {
+		return *this;
+	}
 	kocsi_szam = k.kocsi_szam;
 	helyek_szama = k.helyek_szama;
 	if (helyek != nullptr) delete[] helyek;
@@ -38,7 +41,7 @@ Kocsi& Kocsi::operator=(const Kocsi& k)
 /// <returns>A foglalt hely száma, vagy 0, ha nincs hely</returns>
 int Kocsi::getHely() const
 {
-	for (int i = 0; i < helyek_szama; i++)
+	for (size_t i = 0; i < helyek_szama; i++)
 	{
 		if (helyek[i] == false) { //ha talál nem foglalt helyet, visszaadja
 			helyek[i] = true;
@@ -48,8 +51,8 @@ int Kocsi::getHely() const
 	return 0;
 }
 
-Vonat::Vonat(int vonat_szam, size_t kocsik_szama, size_t helyek_szama, double ar, List<Allomas>& allomasok)
-	:vonat_szam(vonat_szam), kocsik_szama(kocsik_szama), ar(ar), kocsik(), allomasok(allomasok)
+Vonat::Vonat(int vonat_szam, size_t kocsik_szama, size_t helyek_szama, double ar, List<Allomas> allomasok)
+	:vonat_szam(vonat_szam), kocsik_szama(kocsik_szama), ar(ar), allomasok(allomasok), kocsik()
 {
 	for (size_t i = 0; i < kocsik_szama; i++) //elkészítjük a kocsikat
 	{
@@ -58,7 +61,7 @@ Vonat::Vonat(int vonat_szam, size_t kocsik_szama, size_t helyek_szama, double ar
 }
 
 Vonat::Vonat(const Vonat& original) 
-	:vonat_szam(original.vonat_szam), kocsik_szama(original.kocsik_szama), ar(original.ar), kocsik(original.kocsik), allomasok(original.allomasok)
+	:vonat_szam(original.vonat_szam), kocsik_szama(original.kocsik_szama), ar(original.ar), allomasok(original.allomasok), kocsik(original.kocsik)
 {
 }
 
@@ -69,11 +72,11 @@ Vonat::Vonat(const Vonat& original)
 void Vonat::findSeat(int* ret)
 {
 	int hely = 0;
-	auto& kocsi = kocsik.begin();
+	auto kocsi = kocsik.begin();
 	while(kocsi != kocsik.end()) {
 		hely = kocsi->getHely(); //megpróbál helyet kapni egy kocsin
 		if (hely != 0) break;
-		kocsi++;
+		++kocsi;
 	}
 	if (hely != 0) { //ha talált, a tömbbe teszem a kocsiszámot és hely számát
 		ret[0] = kocsi->getKocsiSzam();

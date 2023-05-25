@@ -85,7 +85,7 @@ void Tarsasag::addVonat() {
 		}
 		buffer.getline();
 		it->ido = buffer;
-		it++;
+		++it;
 	}
 	vonatok.push_back(Vonat(vonatszam++, kocsik_szama, helyek_szama, ar, allomasok));
 }
@@ -120,9 +120,9 @@ void Tarsasag::listVonatok(std::ostream& os)
 Vonat& Tarsasag::findVonat() {
 	Vonat* result = nullptr;
 	while(true) {
-		int vonatszam = (int)getnum("A valasztott vonat szama: ");
+		int valasztott_szam = (int)getnum("A valasztott vonat szama: ");
 		for (auto& it : vonatok) {
-			if (it.getVonatSzam() == vonatszam) {
+			if (it.getVonatSzam() == valasztott_szam) {
 				result = &it;
 				break;
 			}
@@ -133,7 +133,7 @@ Vonat& Tarsasag::findVonat() {
 	return *result;
 }
 
-void Tarsasag::buyTicket(SmartPtr<Jegy>& menetjegy, SmartPtr<Jegy>& helyjegy)
+void Tarsasag::buyTicket()
 {
 	if (vonatok.empty()) {
 		std::cout << "Meg nincsen vonat hozzaadva!\n";
@@ -147,41 +147,40 @@ void Tarsasag::buyTicket(SmartPtr<Jegy>& menetjegy, SmartPtr<Jegy>& helyjegy)
 		if (hely[0] != 0) { //ha van hely a vonaton
 			cout << "Kerlek valassz indulo allomast!\n";
 			size_t i = 0; // ebben számoljuk a kiírt állomások mennyiségét
-			for (auto& it : vonat.getAllomasok()) {
+			for (const auto& it : vonat.getAllomasok()) {
 				cout << i + 1 << " " << std::left << std::setw(20) << std::setfill(' ') << it.nev << it.ido << std::endl;
-				i++;
+				++i;
 			}
 			size_t valasztott_all = getnum("Valasztott allomas sorszama: ", i - 1, 1) - 1; //az állomás sorszáma nem lehet az utolsó, vagy nagyobb, -1 az index miatt
 			auto ind_all = vonat.getAllomasok().begin(); // ebben tároljuk, hogy majd melyik állomás lesz az induló
 			double haladott_allomasok = 1;
 			for (size_t j = 0; j != valasztott_all; j++) {
-				ind_all++; //addig léptetjük az állomásokon, amíg el nem ér a választott indexre
-				haladott_allomasok += 1;
+				++ind_all; //addig léptetjük az állomásokon, amíg el nem ér a választott indexre
 			}
 			cout << "Kerlek valassz erkezesi allomast!\n";
 			i = 0; // ebben számoljuk a kiírt állomások mennyiségét
 			auto it = ind_all; //lehetséges érkezési állomás már csak az indulási után jöhet
-			it++; // hogy ne legyen a listán az indulási
+			++it; // hogy ne legyen a listán az indulási
 			while (it != vonat.getAllomasok().end()) {
 				cout << i + 1 << " " << std::left << std::setw(20) << std::setfill(' ') << it->nev << it->ido << std::endl;
-				i++;
-				it++;
+				++i;
+				++it;
 			}
 			//az állomás sorszáma max annyi lehet, ahány állomás van, itt nincs mínusz egy, ezzel mindig továbblép a kövektezõ állomásra
 			valasztott_all = getnum("Valasztott allomas sorszama: ", i, 1);
 			auto erkezesi_all = ind_all; //az indulási állomástól kezdjük a számolást
-			for (size_t j = 0; j != i; j++) {
-				erkezesi_all++;
+			for (size_t j = 0; j < valasztott_all; j++) {
+				++erkezesi_all;
+				haladott_allomasok += 1;
 			}
-			menetjegy = new Menetjegy(vonat.getAr(), jegyszam++, vonat.getVonatSzam(), *ind_all, *erkezesi_all, haladott_allomasok); // kiírjuk a jegyeket a paraméterben megadott pointerbe
-			helyjegy = new Helyjegy(vonat.getAr(), jegyszam++, vonat.getVonatSzam(), *ind_all, *erkezesi_all, hely[0], hely[1], haladott_allomasok);
 
-			eladott_jegyek.push_back(std::shared_ptr<Jegy>(new Menetjegy(vonat.getAr(), jegyszam - 2, vonat.getVonatSzam(), *ind_all, *erkezesi_all, haladott_allomasok))); //a jegyek egy copyját eltárolja magának az objektum
-			eladott_jegyek.push_back(std::shared_ptr<Jegy>(new Helyjegy(vonat.getAr(), jegyszam - 1, vonat.getVonatSzam(), *ind_all, *erkezesi_all, hely[0], hely[1], haladott_allomasok)));
+			eladott_jegyek.push_back(std::shared_ptr<Jegy>(new Menetjegy(vonat.getAr(), jegyszam++, vonat.getVonatSzam(), *ind_all, *erkezesi_all, haladott_allomasok))); //a jegyek egy copyját eltárolja magának az objektum
+			eladott_jegyek.push_back(std::shared_ptr<Jegy>(new Helyjegy(vonat.getAr(), jegyszam++, vonat.getVonatSzam(), *ind_all, *erkezesi_all, hely[0], hely[1], haladott_allomasok)));
 
 			cout << "Az eladott jegyek:\n";
-			menetjegy->kiir();
-			helyjegy->kiir();
+			eladott_jegyek[eladott_jegyek.size() - 2]->kiir();
+			eladott_jegyek[eladott_jegyek.size() - 1]->kiir();
+
 		}
 		else { // ha nincs hely a vonaton
 			cout << "Sajnos a vonaton nem maradt hely!";
@@ -189,7 +188,7 @@ void Tarsasag::buyTicket(SmartPtr<Jegy>& menetjegy, SmartPtr<Jegy>& helyjegy)
 	}
 }
 
-void Tarsasag::buyStudentTicket(SmartPtr<Jegy>& menetjegy, SmartPtr<Jegy>& helyjegy)
+void Tarsasag::buyStudentTicket()
 {
 	if (vonatok.empty()) {
 		std::cout << "Meg nincsen vonat hozzaadva!\n";
@@ -206,41 +205,39 @@ void Tarsasag::buyStudentTicket(SmartPtr<Jegy>& menetjegy, SmartPtr<Jegy>& helyj
 		if (hely[0] != 0) { //ha van hely a vonaton
 			cout << "Kerlek valassz indulo allomast!\n";
 			size_t i = 0; // ebben számoljuk a kiírt állomások mennyiségét
-			for (auto& it : vonat.getAllomasok()) {
+			for (const auto& it : vonat.getAllomasok()) {
 				cout << i + 1 << " " << std::left << std::setw(20) << std::setfill(' ') << it.nev << it.ido << std::endl;
-				i++;
+				++i;
 			}
 			size_t valasztott_all = getnum("Valasztott allomas sorszama: ", i - 1, 1) - 1; //az állomás sorszáma nem lehet az utolsó, vagy nagyobb, -1 az index miatt
 			auto ind_all = vonat.getAllomasok().begin(); // ebben tároljuk, hogy majd melyik állomás lesz az induló
 			double haladott_allomasok = 1;
 			for (size_t j = 0; j != valasztott_all; j++) {
-				ind_all++; //addig léptetjük az állomásokon, amíg el nem ér a választott indexre
-				haladott_allomasok += 1;
+				++ind_all; //addig léptetjük az állomásokon, amíg el nem ér a választott indexre
 			}
 			cout << "Kerlek valassz erkezesi allomast!\n";
 			i = 0; // ebben számoljuk a kiírt állomások mennyiségét
 			auto it = ind_all; //lehetséges érkezési állomás már csak az indulási után jöhet
-			it++; // hogy ne legyen a listán az indulási
+			++it; // hogy ne legyen a listán az indulási
 			while (it != vonat.getAllomasok().end()) {
 				cout << i + 1 << " " << std::left << std::setw(20) << std::setfill(' ') << it->nev << it->ido << std::endl;
-				i++;// ebben számoljuk a kiírt állomások mennyiségét
-				it++; //ékezési állomás lesz
+				++i;// ebben számoljuk a kiírt állomások mennyiségét
+				++it; //ékezési állomás lesz
 			}
 			//az állomás sorszáma max annyi lehet, ahány állomás van, itt nincs mínusz egy, ezzel mindig továbblép a kövektezõ állomásra
 			valasztott_all = getnum("Valasztott allomas sorszama: ", i, 1);
 			auto erkezesi_all = ind_all; //az indulási állomástól kezdjük a számolást
-			for (size_t j = 0; j != i; j++) {
-				erkezesi_all++;
+			for (size_t j = 0; j < valasztott_all; ++j) {
+				++erkezesi_all;
+				haladott_allomasok += 1;
 			}
-			menetjegy = new Diakjegy(vonat.getAr(), jegyszam++, vonat.getVonatSzam(), *ind_all, *erkezesi_all, ig_szam, haladott_allomasok); // kiírjuk a jegyeket a paraméterben megadott pointerbe
-			helyjegy = new Helyjegy(vonat.getAr(), jegyszam++, vonat.getVonatSzam(), *ind_all, *erkezesi_all, hely[0], hely[1], haladott_allomasok);
 
-			eladott_jegyek.push_back(std::shared_ptr<Jegy>(new Diakjegy(vonat.getAr(), jegyszam - 2, vonat.getVonatSzam(), *ind_all, *erkezesi_all, ig_szam, haladott_allomasok))); //a jegyek egy copyját eltárolja magának az objektum
-			eladott_jegyek.push_back(std::shared_ptr<Jegy>(new Helyjegy(vonat.getAr(), jegyszam - 1, vonat.getVonatSzam(), *ind_all, *erkezesi_all, hely[0], hely[1], haladott_allomasok)));
+			eladott_jegyek.push_back(std::shared_ptr<Jegy>(new Diakjegy(vonat.getAr(), jegyszam++, vonat.getVonatSzam(), *ind_all, *erkezesi_all, ig_szam, haladott_allomasok))); //a jegyek egy copyját eltárolja magának az objektum
+			eladott_jegyek.push_back(std::shared_ptr<Jegy>(new Helyjegy(vonat.getAr(), jegyszam++, vonat.getVonatSzam(), *ind_all, *erkezesi_all, hely[0], hely[1], haladott_allomasok)));
 
 			cout << "Az eladott jegyek:\n";
-			menetjegy->kiir();
-			helyjegy->kiir();
+			eladott_jegyek[eladott_jegyek.size() - 2]->kiir();
+			eladott_jegyek[eladott_jegyek.size() - 1]->kiir();
 		}
 		else { // ha nincs hely a vonaton
 			cout << "Sajnos a vonaton nem maradt hely!\n";

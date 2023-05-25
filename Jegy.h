@@ -26,10 +26,10 @@ public:
 class Menetjegy :public Jegy {
 public:
 	Menetjegy(double ar, int szam, int vonat, Allomas& ind, Allomas& erk, double allomasok) :Jegy(ar, szam, vonat, ind, erk, allomasok) {}
-	double getAr() const { return ar * allomasok; }
-	int getszam() const { return szam; }
-	int getVonat() const { return vonat; }
-	void kiir(std::ostream& os = std::cout) const {
+	double getAr() const override { return ar * allomasok; }
+	int getszam() const override { return szam; }
+	int getVonat() const override { return vonat; }
+	void kiir(std::ostream& os = std::cout) const override {
 		os << "Jegyszam: " << szam << std::endl;
 		os << "Menetjegy\n\t" << allomas1 << " - " << allomas2 << "\n\t" << ind_ido << " - " << erk_ido << std::endl;
 		os << "Ar: " << getAr() << std::endl;
@@ -41,10 +41,10 @@ class Diakjegy :public Jegy {
 	String ig_szam;
 public:
 	Diakjegy(double ar, int szam, int vonat, Allomas& ind, Allomas& erk, String& diakigazolvany, double allomasok) :Jegy(ar, szam, vonat, ind, erk, allomasok), ig_szam(diakigazolvany) {}
-	double getAr() const { return ar * 0.1 * allomasok; }
-	int getszam() const { return szam; }
-	int getVonat() const { return vonat; }
-	void kiir(std::ostream& os = std::cout) const {
+	double getAr() const override { return ar * 0.1 * allomasok; }
+	int getszam() const override { return szam; }
+	int getVonat() const override { return vonat; }
+	void kiir(std::ostream& os = std::cout) const override {
 		os << "Jegyszam: " << szam << std::endl;
 		os << "Diakjegy\n\t" << allomas1 << " - " << allomas2 << "\n\t" << ind_ido << " - " << erk_ido << std::endl << "\tDiakigazolvany szam: " << ig_szam << std::endl;
 		os << "Ar: " << getAr() << std::endl;
@@ -55,10 +55,10 @@ class Helyjegy : public Jegy {
 	int kocsi, hely;
 public:
 	Helyjegy(double ar, int szam, int vonat, Allomas& ind, Allomas& erk, int kocsi, int hely, double allomasok) :Jegy(ar, szam, vonat, ind, erk, allomasok), kocsi(kocsi), hely(hely) {}
-	double getAr() const { return ar * 0.2 * allomasok; }
-	int getszam() const { return szam; }
-	int getVonat() const { return vonat; }
-	void kiir(std::ostream& os = std::cout) const {
+	double getAr() const override { return ar * 0.2 * allomasok; }
+	int getszam() const override { return szam; }
+	int getVonat() const override { return vonat; }
+	void kiir(std::ostream& os = std::cout) const override {
 		os << "Jegyszam: " << szam << std::endl;
 		os << "Helyjegy\n\t" << allomas1 << " - " << allomas2 << "\n\t" << ind_ido << " - " << erk_ido << std::endl << "\tKocsi: " << kocsi << " Hely: " << hely << std::endl;
 		os << "Ar: " << getAr() << std::endl;

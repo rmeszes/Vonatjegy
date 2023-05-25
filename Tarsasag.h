@@ -3,7 +3,6 @@
 
 #include "memtrace.h"
 #include "string.h"
-#include "SmartPtr.hpp"
 #include "Vonat.h"
 #include "Jegy.h"
 
@@ -21,8 +20,8 @@ public:
 
 	void listVonatok(std::ostream& os = std::cout); 
 
-	void buyTicket(SmartPtr<Jegy>& menetjegy = SmartPtr<Jegy>(), SmartPtr<Jegy>& helyjegy = SmartPtr<Jegy>());
-	void buyStudentTicket(SmartPtr<Jegy>& menetjegy = SmartPtr<Jegy>(), SmartPtr<Jegy>& helyjegy = SmartPtr<Jegy>());
+	void buyTicket();
+	void buyStudentTicket();
 
 	void eladottJegyek(std::ostream& os = std::cout);
 };
