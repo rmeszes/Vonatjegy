@@ -24,7 +24,7 @@ public:
 	void buyTicket(SmartPtr<Jegy>& menetjegy = SmartPtr<Jegy>(), SmartPtr<Jegy>& helyjegy = SmartPtr<Jegy>());
 	void buyStudentTicket(SmartPtr<Jegy>& menetjegy = SmartPtr<Jegy>(), SmartPtr<Jegy>& helyjegy = SmartPtr<Jegy>());
 
-	void eladottJegyek(std::ostream& os) const { os << "jegyek listázása"; }
+	void eladottJegyek(std::ostream& os = std::cout);
 };
 
 #endif

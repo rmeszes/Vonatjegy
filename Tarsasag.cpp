@@ -247,3 +247,16 @@ void Tarsasag::buyStudentTicket(SmartPtr<Jegy>& menetjegy, SmartPtr<Jegy>& helyj
 		}
 	}
 }
+
+void Tarsasag::eladottJegyek(std::ostream& os)
+{
+	if (eladott_jegyek.empty()) {
+		std::cout << "Meg nincs eladott jegy!\n";
+	}
+	else {
+		cout << "Eladott jegyek:\n";
+		for (auto& it : eladott_jegyek) {
+			it->kiir();
+		}
+	}
+}
