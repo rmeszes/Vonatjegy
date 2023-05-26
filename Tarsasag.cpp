@@ -11,7 +11,7 @@
 
 using std::cout;
 //#define CPORTA
-#if defined(CPORTA)
+#if defined(CPORTA)//cporta esetén a user input kéréseket "némítom"
 	//std::ifstream cin("test.txt");
 	std::ofstream nullStream("nul");
 	std::streambuf* oldBuffer = std::cout.rdbuf(nullStream.rdbuf());
@@ -19,7 +19,7 @@ using std::cout;
 	using std::cin;
 
 /// <summary>
-/// Egy szam bekérésére szolgál
+/// Egy szám bekérésére szolgál
 /// </summary>
 /// <param name="bekert_adat">A felhasználó számára kiírt üzenet, ami leírja mit kér a program</param>
 /// <returns>Egy egész szám</returns>
@@ -52,7 +52,9 @@ size_t getnum(const char* bekert_adat, size_t max = SIZE_MAX, size_t min = 0) {
 	return ret;
 }
 
-
+/// <summary>
+/// Bekéri a felhasználótól a szükséges adatokat, majd hozzáad egy vonatot a társasághoz
+/// </summary>
 void Tarsasag::addVonat() {
 	cout << "Uj vonat hozzaadasa" << std::endl;
 	size_t kocsik_szama = getnum("Kocsik szama: ");
@@ -96,6 +98,10 @@ void Tarsasag::addVonat() {
 	vonatok.push_back(Vonat(vonatszam++, kocsik_szama, helyek_szama, ar, allomasok));
 }
 
+/// <summary>
+/// A vonatok kiírására szolgál
+/// </summary>
+/// <param name="os">A kimeneti ostream</param>
 void Tarsasag::listVonatok(std::ostream& os) 
 {
 	if (vonatok.empty()) {
@@ -123,6 +129,10 @@ void Tarsasag::listVonatok(std::ostream& os)
 	}
 }
 
+/// <summary>
+/// A felhasználótól addig kér be vonatszámot, amíg nem ír be egy létezőt
+/// </summary>
+/// <returns>A megfelelő vonat referenciája</returns>
 Vonat& Tarsasag::findVonat() {
 	Vonat* result = nullptr;
 	while(true) {
@@ -139,6 +149,11 @@ Vonat& Tarsasag::findVonat() {
 	return *result;
 }
 
+
+/// <summary>
+/// Bekéri a felhasználótól a szükséges adatokat egy jegy vásárlásához, majd a jegyet elkészíti
+/// és hozzáadja az eladott_jegyek listájához
+/// </summary>
 void Tarsasag::buyTicket()
 {
 	if (vonatok.empty()) {
@@ -194,6 +209,11 @@ void Tarsasag::buyTicket()
 	}
 }
 
+
+/// <summary>
+/// Bekéri a felhasználótól a szükséges adatokat egy diákjegy vásárlásához, majd a jegyet elkészíti
+/// és hozzáadja az eladott_jegyek listájához
+/// </summary>
 void Tarsasag::buyStudentTicket()
 {
 	if (vonatok.empty()) {
@@ -251,6 +271,10 @@ void Tarsasag::buyStudentTicket()
 	}
 }
 
+/// <summary>
+/// Kiírja az összes ezen társaság által eladott jegyet.
+/// </summary>
+/// <param name="os">A cél ostream</param>
 void Tarsasag::eladottJegyek(std::ostream& os)
 {
 	if (eladott_jegyek.empty()) {
