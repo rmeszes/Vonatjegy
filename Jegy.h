@@ -8,7 +8,6 @@
 
 class Jegy {
 protected:
-	static int sorszam;
 	double ar;
 	int szam, vonat;
 	String allomas1, allomas2, ind_ido, erk_ido;
