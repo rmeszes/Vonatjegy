@@ -13,7 +13,7 @@
 #include "Menu.h"
 #include "string5_test.h"
 
-//#define CPORTA
+#define CPORTA
 
 int releaseMain() {
 	Tarsasag tarsasag;
@@ -28,9 +28,21 @@ int releaseMain() {
 }
 
 int testMain() {
+	//A listának csak használt függvényei vannak bent, külön nem igényel tesztelést
 
 	string_tests();
-	//A listának csak használt függvényei vannak bent, külön nem igényel tesztelést
+
+	TEST(menu, all) {
+		Tarsasag tarsasag;
+		Menu menu;
+		ASSERT_NO_THROW(menu.addItem(String("Uj vonat hozzadasa"), [&tarsasag]() {tarsasag.addVonat(); }));
+		ASSERT_NO_THROW(menu.addItem(String("Vonatok kilistazasa"), [&tarsasag]() {tarsasag.listVonatok(); }));
+		ASSERT_NO_THROW(menu.addItem(String("Teljesaru jegy vasarlasa"), [&tarsasag]() {tarsasag.buyTicket(); }));
+		ASSERT_NO_THROW(menu.addItem(String("Diakjegy vasarlasa"), [&tarsasag]() {tarsasag.buyStudentTicket(); }));
+		ASSERT_NO_THROW(menu.addItem(String("Eddig eladott jegyek"), [&tarsasag]() {tarsasag.eladottJegyek(); }));
+		ASSERT_NO_THROW(menu.display());
+	} END;
+
 	TEST(0, tarsasag_ctor) {
 		ASSERT_NO_THROW(Tarsasag t);
 	} END

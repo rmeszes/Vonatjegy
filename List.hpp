@@ -83,18 +83,6 @@ public:
 			return(tmp);
 		}
 
-		iterator& operator--() { //pre
-			if (curr != nullptr) {
-				curr = curr->prev;
-			}
-			return(*this);
-		}
-		iterator operator--(int) { //post
-			iterator tmp = *this; //eltároljuk
-			operator--(); //növel
-			return(tmp);
-		}
-
 		bool operator!=(const iterator& i) const {
 			return curr != i.curr;
 		}

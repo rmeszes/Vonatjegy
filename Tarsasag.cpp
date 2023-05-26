@@ -13,11 +13,10 @@ using std::cout;
 //#define CPORTA
 #if defined(CPORTA)
 	//std::ifstream cin("test.txt");
-	//std::ofstream nullStream("nul");
-	//std::streambuf* oldBuffer = std::cout.rdbuf(nullStream.rdbuf());
-#else
-	using std::cin;
+	std::ofstream nullStream("nul");
+	std::streambuf* oldBuffer = std::cout.rdbuf(nullStream.rdbuf());
 #endif
+	using std::cin;
 
 /// <summary>
 /// Egy szam bekérésére szolgál
