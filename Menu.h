@@ -16,7 +16,7 @@ using std::cin;
 size_t getnum(const char* bekert_adat, size_t max = SIZE_MAX, size_t min = 0);
 class Menu
 {
-	struct MenuItem { // 2 elem összekötésére szolgál csak
+	struct MenuItem { // 2 elem Ã¶sszekÃ¶tÃ©sÃ©re szolgÃ¡l csak
 		String label;
 		std::function<void()> action;
 	};

@@ -15,15 +15,15 @@ using std::cout;
 	//std::ifstream cin("test.txt");
 	//std::ofstream nullStream("nul");
 	//std::streambuf* oldBuffer = std::cout.rdbuf(nullStream.rdbuf());
- 
+#else
 	using std::cin;
 #endif
 
 /// <summary>
-/// Egy szam bekÈrÈsÈre szolg·l
+/// Egy szam bek√©r√©s√©re szolg√°l
 /// </summary>
-/// <param name="bekert_adat">A felhaszn·lÛ sz·m·ra kiÌrt ¸zenet, ami leÌrja mit kÈr a program</param>
-/// <returns>Egy egÈsz sz·m</returns>
+/// <param name="bekert_adat">A felhaszn√°l√≥ sz√°m√°ra ki√≠rt √ºzenet, ami le√≠rja mit k√©r a program</param>
+/// <returns>Egy eg√©sz sz√°m</returns>
 size_t getnum(const char* bekert_adat, size_t max = SIZE_MAX, size_t min = 0) {
 	String buffer;
 	size_t ret = 0;
@@ -33,9 +33,9 @@ size_t getnum(const char* bekert_adat, size_t max = SIZE_MAX, size_t min = 0) {
 		buffer.getline(cin);
 		for (size_t i = 0; i < buffer.size(); i++) {
 			if (!isdigit(buffer.c_str()[i])) valid = false;
-			if (valid == false) break; // ha m·r invalid ne fusson vÈgig
+			if (valid == false) break; // ha m√°r invalid ne fusson v√©gig
 		}
-		if (valid == true) { // ha az ˆsszes elem sz·m, jˆhet
+		if (valid == true) { // ha az √∂sszes elem sz√°m, j√∂het
 			ret = strtoull(buffer.c_str(),nullptr, 10);
 			if (ret > max) {
 				cout << "A szam tul nagy!\n";
@@ -153,35 +153,35 @@ void Tarsasag::buyTicket()
 		vonat.findSeat(hely);
 		if (hely[0] != 0) { //ha van hely a vonaton
 			cout << "Kerlek valassz indulo allomast!\n";
-			size_t i = 0; // ebben sz·moljuk a kiÌrt ·llom·sok mennyisÈgÈt
+			size_t i = 0; // ebben sz√°moljuk a ki√≠rt √°llom√°sok mennyis√©g√©t
 			for (const auto& it : vonat.getAllomasok()) {
 				cout << i + 1 << " " << std::left << std::setw(20) << std::setfill(' ') << it.nev << it.ido << std::endl;
 				++i;
 			}
-			size_t valasztott_all = getnum("Valasztott allomas sorszama: ", i - 1, 1) - 1; //az ·llom·s sorsz·ma nem lehet az utolsÛ, vagy nagyobb, -1 az index miatt
-			auto ind_all = vonat.getAllomasok().begin(); // ebben t·roljuk, hogy majd melyik ·llom·s lesz az indulÛ
+			size_t valasztott_all = getnum("Valasztott allomas sorszama: ", i - 1, 1) - 1; //az √°llom√°s sorsz√°ma nem lehet az utols√≥, vagy nagyobb, -1 az index miatt
+			auto ind_all = vonat.getAllomasok().begin(); // ebben t√°roljuk, hogy majd melyik √°llom√°s lesz az indul√≥
 			double haladott_allomasok = 0;
 			for (size_t j = 0; j != valasztott_all; j++) {
-				++ind_all; //addig lÈptetj¸k az ·llom·sokon, amÌg el nem Èr a v·lasztott indexre
+				++ind_all; //addig l√©ptetj√ºk az √°llom√°sokon, am√≠g el nem √©r a v√°lasztott indexre
 			}
 			cout << "Kerlek valassz erkezesi allomast!\n";
-			i = 0; // ebben sz·moljuk a kiÌrt ·llom·sok mennyisÈgÈt
-			auto it = ind_all; //lehetsÈges ÈrkezÈsi ·llom·s m·r csak az indul·si ut·n jˆhet
-			++it; // hogy ne legyen a list·n az indul·si
+			i = 0; // ebben sz√°moljuk a ki√≠rt √°llom√°sok mennyis√©g√©t
+			auto it = ind_all; //lehets√©ges √©rkez√©si √°llom√°s m√°r csak az indul√°si ut√°n j√∂het
+			++it; // hogy ne legyen a list√°n az indul√°si
 			while (it != vonat.getAllomasok().end()) {
 				cout << i + 1 << " " << std::left << std::setw(20) << std::setfill(' ') << it->nev << it->ido << std::endl;
 				++i;
 				++it;
 			}
-			//az ·llom·s sorsz·ma max annyi lehet, ah·ny ·llom·s van, itt nincs mÌnusz egy, ezzel mindig tov·bblÈp a kˆvektezı ·llom·sra
+			//az √°llom√°s sorsz√°ma max annyi lehet, ah√°ny √°llom√°s van, itt nincs m√≠nusz egy, ezzel mindig tov√°bbl√©p a k√∂vektez≈ë √°llom√°sra
 			valasztott_all = getnum("Valasztott allomas sorszama: ", i, 1);
-			auto erkezesi_all = ind_all; //az indul·si ·llom·stÛl kezdj¸k a sz·mol·st
+			auto erkezesi_all = ind_all; //az indul√°si √°llom√°st√≥l kezdj√ºk a sz√°mol√°st
 			for (size_t j = 0; j < valasztott_all; j++) {
 				++erkezesi_all;
 				haladott_allomasok += 1;
 			}
 
-			eladott_jegyek.push_back(std::shared_ptr<Jegy>(new Menetjegy(vonat.getAr(), jegyszam++, vonat.getVonatSzam(), *ind_all, *erkezesi_all, haladott_allomasok))); //a jegyek egy copyj·t elt·rolja mag·nak az objektum
+			eladott_jegyek.push_back(std::shared_ptr<Jegy>(new Menetjegy(vonat.getAr(), jegyszam++, vonat.getVonatSzam(), *ind_all, *erkezesi_all, haladott_allomasok))); //a jegyek egy copyj√°t elt√°rolja mag√°nak az objektum
 			eladott_jegyek.push_back(std::shared_ptr<Jegy>(new Helyjegy(vonat.getAr(), jegyszam++, vonat.getVonatSzam(), *ind_all, *erkezesi_all, hely[0], hely[1], haladott_allomasok)));
 
 			cout << "Az eladott jegyek:\n";
@@ -211,35 +211,35 @@ void Tarsasag::buyStudentTicket()
 		vonat.findSeat(hely);
 		if (hely[0] != 0) { //ha van hely a vonaton
 			cout << "Kerlek valassz indulo allomast!\n";
-			size_t i = 0; // ebben sz·moljuk a kiÌrt ·llom·sok mennyisÈgÈt
+			size_t i = 0; // ebben sz√°moljuk a ki√≠rt √°llom√°sok mennyis√©g√©t
 			for (const auto& it : vonat.getAllomasok()) {
 				cout << i + 1 << " " << std::left << std::setw(20) << std::setfill(' ') << it.nev << it.ido << std::endl;
 				++i;
 			}
-			size_t valasztott_all = getnum("Valasztott allomas sorszama: ", i - 1, 1) - 1; //az ·llom·s sorsz·ma nem lehet az utolsÛ, vagy nagyobb, -1 az index miatt
-			auto ind_all = vonat.getAllomasok().begin(); // ebben t·roljuk, hogy majd melyik ·llom·s lesz az indulÛ
+			size_t valasztott_all = getnum("Valasztott allomas sorszama: ", i - 1, 1) - 1; //az √°llom√°s sorsz√°ma nem lehet az utols√≥, vagy nagyobb, -1 az index miatt
+			auto ind_all = vonat.getAllomasok().begin(); // ebben t√°roljuk, hogy majd melyik √°llom√°s lesz az indul√≥
 			double haladott_allomasok = 0;
 			for (size_t j = 0; j != valasztott_all; j++) {
-				++ind_all; //addig lÈptetj¸k az ·llom·sokon, amÌg el nem Èr a v·lasztott indexre
+				++ind_all; //addig l√©ptetj√ºk az √°llom√°sokon, am√≠g el nem √©r a v√°lasztott indexre
 			}
 			cout << "Kerlek valassz erkezesi allomast!\n";
-			i = 0; // ebben sz·moljuk a kiÌrt ·llom·sok mennyisÈgÈt
-			auto it = ind_all; //lehetsÈges ÈrkezÈsi ·llom·s m·r csak az indul·si ut·n jˆhet
-			++it; // hogy ne legyen a list·n az indul·si
+			i = 0; // ebben sz√°moljuk a ki√≠rt √°llom√°sok mennyis√©g√©t
+			auto it = ind_all; //lehets√©ges √©rkez√©si √°llom√°s m√°r csak az indul√°si ut√°n j√∂het
+			++it; // hogy ne legyen a list√°n az indul√°si
 			while (it != vonat.getAllomasok().end()) {
 				cout << i + 1 << " " << std::left << std::setw(20) << std::setfill(' ') << it->nev << it->ido << std::endl;
-				++i;// ebben sz·moljuk a kiÌrt ·llom·sok mennyisÈgÈt
-				++it; //ÈkezÈsi ·llom·s lesz
+				++i;// ebben sz√°moljuk a ki√≠rt √°llom√°sok mennyis√©g√©t
+				++it; //√©kez√©si √°llom√°s lesz
 			}
-			//az ·llom·s sorsz·ma max annyi lehet, ah·ny ·llom·s van, itt nincs mÌnusz egy, ezzel mindig tov·bblÈp a kˆvektezı ·llom·sra
+			//az √°llom√°s sorsz√°ma max annyi lehet, ah√°ny √°llom√°s van, itt nincs m√≠nusz egy, ezzel mindig tov√°bbl√©p a k√∂vektez≈ë √°llom√°sra
 			valasztott_all = getnum("Valasztott allomas sorszama: ", i, 1);
-			auto erkezesi_all = ind_all; //az indul·si ·llom·stÛl kezdj¸k a sz·mol·st
+			auto erkezesi_all = ind_all; //az indul√°si √°llom√°st√≥l kezdj√ºk a sz√°mol√°st
 			for (size_t j = 0; j < valasztott_all; ++j) {
 				++erkezesi_all;
 				haladott_allomasok += 1;
 			}
 
-			eladott_jegyek.push_back(std::shared_ptr<Jegy>(new Diakjegy(vonat.getAr(), jegyszam++, vonat.getVonatSzam(), *ind_all, *erkezesi_all, ig_szam, haladott_allomasok))); //a jegyek egy copyj·t elt·rolja mag·nak az objektum
+			eladott_jegyek.push_back(std::shared_ptr<Jegy>(new Diakjegy(vonat.getAr(), jegyszam++, vonat.getVonatSzam(), *ind_all, *erkezesi_all, ig_szam, haladott_allomasok))); //a jegyek egy copyj√°t elt√°rolja mag√°nak az objektum
 			eladott_jegyek.push_back(std::shared_ptr<Jegy>(new Helyjegy(vonat.getAr(), jegyszam++, vonat.getVonatSzam(), *ind_all, *erkezesi_all, hely[0], hely[1], haladott_allomasok)));
 
 			cout << "Az eladott jegyek:\n";

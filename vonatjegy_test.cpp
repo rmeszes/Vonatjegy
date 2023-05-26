@@ -30,7 +30,7 @@ int releaseMain() {
 int testMain() {
 
 	string_tests();
-	//A listának csak használt függvényei vannak bent, külön nem igényel tesztelést
+	//A listÃ¡nak csak hasznÃ¡lt fÃ¼ggvÃ©nyei vannak bent, kÃ¼lÃ¶n nem igÃ©nyel tesztelÃ©st
 	TEST(0, tarsasag_ctor) {
 		ASSERT_NO_THROW(Tarsasag t);
 	} END

@@ -9,127 +9,127 @@ template<class T> class List
 		ListElement * prev, *next;
 		explicit ListElement(const T& data, ListElement* prev = nullptr, ListElement* next = nullptr) :data(data), prev(prev), next(next) {}
 	};
-    ListElement* sentinel_begin, *sentinel_end;
-    size_t num_of_elements;
+	ListElement* sentinel_begin, *sentinel_end;
+	size_t num_of_elements;
 public:
-    List() :sentinel_begin(nullptr), sentinel_end(nullptr), num_of_elements(0) {}
+	List() :sentinel_begin(nullptr), sentinel_end(nullptr), num_of_elements(0) {}
 
-    List(const List& origin) :num_of_elements(origin.num_of_elements) {
-        if (origin.sentinel_begin == nullptr) { //megnézzük, hogy az origin lista üres-e
-            sentinel_begin = nullptr;
-            sentinel_end = nullptr;
-        }
-        else {
-            ListElement* from = origin.sentinel_begin; //a pointer amit végigléptetünk az original listán
-            ListElement* current = new ListElement(from->data); //a pointer ami az újonnan létrehozott elemekre mutat
-            sentinel_begin = current; //beállítom a sentinteleket az új elemre
-            sentinel_end = current;
-            while (from != origin.sentinel_end) { 
-                current->next = new ListElement(from->next->data, current); //az új elem létrehozása
+	List(const List& origin) :num_of_elements(origin.num_of_elements) {
+		if (origin.sentinel_begin == nullptr) { //megnÃ©zzÃ¼k, hogy az origin lista Ã¼res-e
+			sentinel_begin = nullptr;
+			sentinel_end = nullptr;
+		}
+		else {
+			ListElement* from = origin.sentinel_begin; //a pointer amit vÃ©giglÃ©ptetÃ¼nk az original listÃ¡n
+			ListElement* current = new ListElement(from->data); //a pointer ami az Ãºjonnan lÃ©trehozott elemekre mutat
+			sentinel_begin = current; //beÃ¡llÃ­tom a sentinteleket az Ãºj elemre
+			sentinel_end = current;
+			while (from != origin.sentinel_end) { 
+				current->next = new ListElement(from->next->data, current); //az Ãºj elem lÃ©trehozÃ¡sa
 
-                from = from->next; //pointerek léptetése
-                current = current->next;
-            }
-            sentinel_end = current; //a lista vége változik
-        }
-    }
+				from = from->next; //pointerek lÃ©ptetÃ©se
+				current = current->next;
+			}
+			sentinel_end = current; //a lista vÃ©ge vÃ¡ltozik
+		}
+	}
 
-    ~List() {
-        ListElement* p = sentinel_begin;
-        while (p != nullptr) {
-            ListElement* temp = p;
-            p = p->next;
-            delete temp;
-        }
-    }
+	~List() {
+		ListElement* p = sentinel_begin;
+		while (p != nullptr) {
+			ListElement* temp = p;
+			p = p->next;
+			delete temp;
+		}
+	}
 
-    void push_back(const T& data) {
-        if (sentinel_begin == nullptr) {
-            sentinel_begin = sentinel_end = new ListElement(data);
-        }
-        else {
-            sentinel_end->next = new ListElement(data, sentinel_end); //az új elemet beadja az utolsó után
-            sentinel_end = sentinel_end->next; //a sentinelt az új elemre állítjuk
-        }
-        num_of_elements++;
-    }
+	void push_back(const T& data) {
+		if (sentinel_begin == nullptr) {
+			sentinel_begin = sentinel_end = new ListElement(data);
+		}
+		else {
+			sentinel_end->next = new ListElement(data, sentinel_end); //az Ãºj elemet beadja az utolsÃ³ utÃ¡n
+			sentinel_end = sentinel_end->next; //a sentinelt az Ãºj elemre Ã¡llÃ­tjuk
+		}
+		num_of_elements++;
+	}
 
-    bool empty() const { return(num_of_elements == 0); }
+	bool empty() const { return(num_of_elements == 0); }
 
-    size_t size() const { return num_of_elements; }
+	size_t size() const { return num_of_elements; }
 
-    T& front() {
-        return sentinel_begin->data;
-    }
+	T& front() {
+		return sentinel_begin->data;
+	}
 
-    T& back() {
-        return sentinel_end->data;
-    }
+	T& back() {
+		return sentinel_end->data;
+	}
 
-    class iterator {
-        ListElement *curr;
-    public:
-        iterator() :curr(nullptr) {}; //végére állítja az iterátort
-        explicit iterator(const List& l) :curr(l.sentinel_begin) {}
-        iterator& operator++() { //pre
-            if (curr != nullptr) {
-                curr = curr->next;
-            }
-            return(*this);
-        }
-        iterator operator++(int) { //post
-            iterator tmp = *this; //eltároljuk
-            operator++(); //növel
-            return(tmp);
-        }
+	class iterator {
+		ListElement *curr;
+	public:
+		iterator() :curr(nullptr) {}; //vÃ©gÃ©re Ã¡llÃ­tja az iterÃ¡tort
+		explicit iterator(const List& l) :curr(l.sentinel_begin) {}
+		iterator& operator++() { //pre
+			if (curr != nullptr) {
+				curr = curr->next;
+			}
+			return(*this);
+		}
+		iterator operator++(int) { //post
+			iterator tmp = *this; //eltÃ¡roljuk
+			operator++(); //nÃ¶vel
+			return(tmp);
+		}
 
-        iterator& operator--() { //pre
-            if (curr != nullptr) {
-                curr = curr->prev;
-            }
-            return(*this);
-        }
-        iterator operator--(int) { //post
-            iterator tmp = *this; //eltároljuk
-            operator--(); //növel
-            return(tmp);
-        }
+		iterator& operator--() { //pre
+			if (curr != nullptr) {
+				curr = curr->prev;
+			}
+			return(*this);
+		}
+		iterator operator--(int) { //post
+			iterator tmp = *this; //eltÃ¡roljuk
+			operator--(); //nÃ¶vel
+			return(tmp);
+		}
 
-        bool operator!=(const iterator& i) const {
-            return curr != i.curr;
-        }
+		bool operator!=(const iterator& i) const {
+			return curr != i.curr;
+		}
 
-        T& operator*() {
-            if (curr != nullptr) return curr->data;
-            else throw std::runtime_error("hibás iterátor");
-        }
+		T& operator*() {
+			if (curr != nullptr) return curr->data;
+			else throw std::runtime_error("hibÃ¡s iterÃ¡tor");
+		}
 
-        T* operator->() {
-            if (curr != nullptr) return &curr->data;
-            else throw std::runtime_error("hibás iterátor");
-        }
-    };
-    iterator begin() {
-        return(iterator(*this));
-    }
+		T* operator->() {
+			if (curr != nullptr) return &curr->data;
+			else throw std::runtime_error("hibÃ¡s iterÃ¡tor");
+		}
+	};
+	iterator begin() {
+		return(iterator(*this));
+	}
 
-    iterator end() {
-        return(iterator());
-    }
+	iterator end() {
+		return(iterator());
+	}
 
-    T& operator[](const size_t idx) {
-        if (idx >= size()) throw std::out_of_range("index out of range");
-        ListElement* it = sentinel_begin;
-        for (size_t i = 0; i < idx; i++) it = it->next;
-        return it->data;
-    }
+	T& operator[](const size_t idx) {
+		if (idx >= size()) throw std::out_of_range("index out of range");
+		ListElement* it = sentinel_begin;
+		for (size_t i = 0; i < idx; i++) it = it->next;
+		return it->data;
+	}
 
-    T operator[](const size_t idx) const {
-        if (idx >= size()) throw std::out_of_range("index out of range");
-        ListElement* it = sentinel_begin;
-        for (size_t i = 0; i < idx; i++) it = it->next;
-        return it->data;
-    }
+	T operator[](const size_t idx) const {
+		if (idx >= size()) throw std::out_of_range("index out of range");
+		ListElement* it = sentinel_begin;
+		for (size_t i = 0; i < idx; i++) it = it->next;
+		return it->data;
+	}
 };
 
 #endif // !LIST_H

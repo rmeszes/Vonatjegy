@@ -1,10 +1,10 @@
-//f¸ggvÈny definÌciÛk ide
+//f√ºggv√©ny defin√≠ci√≥k ide
 #include "Vonat.h"
 
 Kocsi::Kocsi(int kocsi_szam, size_t helyek_szama) :kocsi_szam(kocsi_szam), helyek_szama(helyek_szama) {
 	if (helyek_szama == 0) { helyek = nullptr; }
 	else { helyek = new bool[helyek_szama]; }
-	for (size_t i = 0; i < helyek_szama; i++) //inicializ·lom a tˆmb elemeit, hogy biztosan false legyen
+	for (size_t i = 0; i < helyek_szama; i++) //inicializ√°lom a t√∂mb elemeit, hogy biztosan false legyen
 	{
 		helyek[i] = false;
 	}
@@ -36,16 +36,16 @@ Kocsi& Kocsi::operator=(const Kocsi& k)
 
 
 /// <summary>
-/// KÈr egy helyet a kocsiban
+/// K√©r egy helyet a kocsiban
 /// </summary>
-/// <returns>A foglalt hely sz·ma, vagy 0, ha nincs hely</returns>
+/// <returns>A foglalt hely sz√°ma, vagy 0, ha nincs hely</returns>
 int Kocsi::getHely() const
 {
 	for (size_t i = 0; i < helyek_szama; i++)
 	{
-		if (helyek[i] == false) { //ha tal·l nem foglalt helyet, visszaadja
+		if (helyek[i] == false) { //ha tal√°l nem foglalt helyet, visszaadja
 			helyek[i] = true;
-			return i + 1; //hogy az elsı ¸lÈs sz·ma 1 legyen Ès Ìgy tov·bb
+			return i + 1; //hogy az els≈ë √ºl√©s sz√°ma 1 legyen √©s √≠gy tov√°bb
 		}
 	}
 	return 0;
@@ -54,7 +54,7 @@ int Kocsi::getHely() const
 Vonat::Vonat(int vonat_szam, size_t kocsik_szama, size_t helyek_szama, double ar, List<Allomas>& allomasok)
 	:vonat_szam(vonat_szam), kocsik_szama(kocsik_szama), ar(ar), allomasok(allomasok), kocsik()
 {
-	for (size_t i = 0; i < kocsik_szama; i++) //elkÈszÌtj¸k a kocsikat
+	for (size_t i = 0; i < kocsik_szama; i++) //elk√©sz√≠tj√ºk a kocsikat
 	{
 		kocsik.push_back(Kocsi(100 + i, helyek_szama));
 	}
@@ -66,19 +66,19 @@ Vonat::Vonat(const Vonat& original)
 }
 
 /// <summary>
-/// MegprÛb·l helyet foglalni a vonaton
+/// Megpr√≥b√°l helyet foglalni a vonaton
 /// </summary>
-/// <param name="ret">2 mÈret˚ tˆmb, ennek az elsı helyÈre ker¸l a kocsisz·m, a m·sodikba a hely sz·m</param>
+/// <param name="ret">2 m√©ret≈± t√∂mb, ennek az els≈ë hely√©re ker√ºl a kocsisz√°m, a m√°sodikba a hely sz√°m</param>
 void Vonat::findSeat(int* ret)
 {
 	int hely = 0;
 	auto kocsi = kocsik.begin();
 	while(kocsi != kocsik.end()) {
-		hely = kocsi->getHely(); //megprÛb·l helyet kapni egy kocsin
+		hely = kocsi->getHely(); //megpr√≥b√°l helyet kapni egy kocsin
 		if (hely != 0) break;
 		++kocsi;
 	}
-	if (hely != 0) { //ha tal·lt, a tˆmbbe teszem a kocsisz·mot Ès hely sz·m·t
+	if (hely != 0) { //ha tal√°lt, a t√∂mbbe teszem a kocsisz√°mot √©s hely sz√°m√°t
 		ret[0] = kocsi->getKocsiSzam();
 		ret[1] = hely;
 	}

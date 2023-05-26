@@ -26,8 +26,8 @@ public:
 };
 
 /// <summary>
-/// A két adat összekötésére szolgál
-/// Minden vonat az Állomás saját példányait tárolja, ezért köthetõ hozzá az idõ.
+/// A kÃ©t adat Ã¶sszekÃ¶tÃ©sÃ©re szolgÃ¡l
+/// Minden vonat az ÃllomÃ¡s sajÃ¡t pÃ©ldÃ¡nyait tÃ¡rolja, ezÃ©rt kÃ¶thetÅ‘ hozzÃ¡ az idÅ‘.
 /// </summary>
 struct Allomas { 
 	String nev; 

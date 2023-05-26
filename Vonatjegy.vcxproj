@@ -39,6 +39,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <EnableASAN>true</EnableASAN>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -122,7 +123,6 @@
     <ClInclude Include="List.hpp" />
     <ClInclude Include="memtrace.h" />
     <ClInclude Include="Menu.h" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="string.h" />
     <ClInclude Include="string5_test.h" />
     <ClInclude Include="Tarsasag.h" />
