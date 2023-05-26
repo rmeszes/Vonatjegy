@@ -6,6 +6,9 @@
 #include "memtrace.h"
 #include "string.h"
 
+/// <summary>
+/// Heterogén kollekció ősosztálya, a különböző jegytípusok gyűjtésére és kompatibilitásának megoldására
+/// </summary>
 class Jegy {
 protected:
 	double ar;
@@ -22,6 +25,9 @@ public:
 	virtual ~Jegy() {}
 };
 
+/// <summary>
+/// Egyszerű menetjegy, teljes árat kell fizetni érte
+/// </summary>
 class Menetjegy :public Jegy {
 public:
 	Menetjegy(double ar, int szam, int vonat, Allomas& ind, Allomas& erk, double allomasok) :Jegy(ar, szam, vonat, ind, erk, allomasok) {}
@@ -36,6 +42,9 @@ public:
 	~Menetjegy() {}
 };
 
+/// <summary>
+/// Kedvezményes diákjegy, 90%-os kedvezmény jár rá. Eltárolja a diákigazolvány számot is.
+/// </summary>
 class Diakjegy :public Jegy {
 	String ig_szam;
 public:
@@ -50,6 +59,9 @@ public:
 	}
 };
 
+/// <summary>
+/// Helyjegy, minden jegyhez jár egy, ezen szerepel a lefoglalt hely és, hogy az melyik kocsiban van.
+/// </summary>
 class Helyjegy : public Jegy {
 	int kocsi, hely;
 public:
@@ -64,4 +76,4 @@ public:
 	}
 };
 
-#endif
+#endif //!JEGY_H

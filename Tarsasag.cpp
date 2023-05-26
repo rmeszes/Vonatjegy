@@ -96,10 +96,7 @@ void Tarsasag::addVonat() {
 	vonatok.push_back(Vonat(vonatszam++, kocsik_szama, helyek_szama, ar, allomasok));
 }
 
-/// <summary>
-/// A vonatok kiírására szolgál
-/// </summary>
-/// <param name="os">A kimeneti ostream</param>
+
 void Tarsasag::listVonatok(std::ostream& os) 
 {
 	if (vonatok.empty()) {
@@ -127,7 +124,10 @@ void Tarsasag::listVonatok(std::ostream& os)
 	}
 }
 
-
+	
+/// A felhasználótól addig kér be vonatszámot, amíg nem ír be egy létezőt
+/// </summary>
+/// <returns>A megfelelő vonat referenciája</returns>
 Vonat& Tarsasag::findVonat() {
 	Vonat* result = nullptr;
 	while(true) {

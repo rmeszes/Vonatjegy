@@ -5,6 +5,10 @@
 #include "List.hpp"
 #include "string.h"
 
+
+/// <summary>
+/// Egy vonat 1 kocsija. Tárolja a saját számát, ami megjelenik a jegyen és a rajta található helyek foglaltságát.
+/// </summary>
 class Kocsi {
 	int kocsi_szam;
 	bool* helyek;
@@ -16,6 +20,11 @@ public:
 	Kocsi& operator=(const Kocsi& k);
 
 	int getKocsiSzam() const { return kocsi_szam; }
+
+	/// <summary>
+	/// A kocsin hely lefoglalásáért felel.
+	/// </summary>
+	/// <returns>A lefoglalt hely száma. 0 ha nincs.</returns>
 	int getHely() const;
 
 	~Kocsi() { 
@@ -37,6 +46,9 @@ struct Allomas {
 	Allomas(const Allomas& a) :nev(a.nev), ido(a.ido) {}
 };
 
+/// <summary>
+/// 1 Vonat, tárolja saját azonosítóját, hány kocsija van, mennyi az alapára / állomás, a megállóit, és kocsijait.
+/// </summary>
 class Vonat {
 	int vonat_szam;
 	size_t kocsik_szama;
@@ -59,6 +71,12 @@ public:
 
 	List<Allomas>& getAllomasok() { return allomasok; }
 
+	/// <summary>
+	/// Egy hely lefoglalására szolgál
+	/// </summary>
+	/// <param name="ret">Ennek egy legalább 2 méretű int tömbnek kell legyen, a [0]. helyen lesz a kocsi száma,
+	/// a [1]. helyen pedig a lefoglalt hely száma jelenik meg.
+	/// mindkettő 0, ha a vonaton már minden hely foglalt.</param>
 	void findSeat(int* ret);
 };
 #endif // !VONAT_H

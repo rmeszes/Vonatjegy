@@ -35,10 +35,6 @@ Kocsi& Kocsi::operator=(const Kocsi& k)
 }
 
 
-/// <summary>
-/// Kér egy helyet a kocsiban
-/// </summary>
-/// <returns>A foglalt hely száma, vagy 0, ha nincs hely</returns>
 int Kocsi::getHely() const
 {
 	for (size_t i = 0; i < helyek_szama; i++)
@@ -65,10 +61,6 @@ Vonat::Vonat(const Vonat& original)
 {
 }
 
-/// <summary>
-/// Megpróbál helyet foglalni a vonaton
-/// </summary>
-/// <param name="ret">2 méretű tömb, ennek az első helyére kerül a kocsiszám, a másodikba a hely szám</param>
 void Vonat::findSeat(int* ret)
 {
 	int hely = 0;

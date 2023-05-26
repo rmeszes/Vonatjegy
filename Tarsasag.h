@@ -21,10 +21,11 @@ public:
 	/// </summary>
 	void addVonat();
 
+	
 	/// <summary>
-	/// A felhasználótól addig kér be vonatszámot, amíg nem ír be egy létezőt
+	/// A vonatok kiírására szolgál
 	/// </summary>
-	/// <returns>A megfelelő vonat referenciája</returns>
+	/// <param name="os">A kimeneti ostream</param>
 	void listVonatok(std::ostream& os = std::cout); 
 
 	/// <summary>
