@@ -13,7 +13,7 @@
 #include "Menu.h"
 #include "string5_test.h"
 
-#define CPORTA
+//#define CPORTA
 
 int releaseMain() {
 	Tarsasag tarsasag;

@@ -9,16 +9,6 @@
 #include "List.hpp"
 #include "string.h"
 
-using std::cout;
-using std::cin;
-
-/// <summary>
-/// Egy szám bekérésére szolgál
-/// </summary>
-/// <param name="bekert_adat">A felhasználó számára kiírt üzenet, ami leírja mit kér a program</param>
-/// <returns>Egy egész szám</returns>
-size_t getnum(const char* bekert_adat, size_t max = SIZE_MAX, size_t min = 0);
-
 /// <summary>
 /// Egy osztály a konzolos menü kezelésére
 /// </summary>

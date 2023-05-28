@@ -6,6 +6,11 @@
 #include "Vonat.h"
 #include "Jegy.h"
 
+
+/// <summary>
+/// Interfész class, gyűjti a vonatokat és eladott jegyeket. Ezen osztály publikus funkcióinak meghívása valamilyen teljes
+/// feladatot hajt végre, beleértve a felhasználóval való kommunikációt.
+/// </summary>
 class Tarsasag {
 	int jegyszam;
 	int vonatszam;

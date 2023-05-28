@@ -11,18 +11,20 @@
 
 using std::cout;
 //#define CPORTA
-#if defined(CPORTA)//cporta esetén a user input kéréseket "némítom"
+/*#if defined(CPORTA)//cporta esetén a user input kéréseket "némítom"
 	//std::ifstream cin("test.txt");
 	std::ofstream nullStream("nul");
 	std::streambuf* oldBuffer = std::cout.rdbuf(nullStream.rdbuf());
-#endif
+#endif*/
 	using std::cin;
 
 /// <summary>
-/// Egy szám bekérésére szolgál
+/// Egy pozitív egész szám bekérésére szolgál ami > 0
 /// </summary>
-/// <param name="bekert_adat">A felhasználó számára kiírt üzenet, ami leírja mit kér a program</param>
-/// <returns>Egy egész szám</returns>
+/// <param name="bekert_adat">A felhasználónak segítség, hogy mit írjon be</param>
+/// <param name="max">A maximum elfogadott szám. (nem kötelező)</param>
+/// <param name="min">A minimum elfogadott szám. (nem kötelező)</param>
+/// <returns>A sikeresen bekért szám</returns>
 size_t getnum(const char* bekert_adat, size_t max = SIZE_MAX, size_t min = 0) {
 	String buffer;
 	size_t ret = 0;
