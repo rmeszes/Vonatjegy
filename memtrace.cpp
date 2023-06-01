@@ -18,9 +18,10 @@ typo:       2019.
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <string5.h>
 #include <time.h>
 #include <ctype.h>
+#include <cstring>
 
 #ifdef MEMTRACE
 #define FROM_MEMTRACE_CPP

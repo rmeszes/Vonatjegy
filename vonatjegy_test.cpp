@@ -7,7 +7,7 @@
 
 #include "Vonat.h"
 #include "List.hpp"
-#include "string.h"
+#include "string5.h"
 #include "Tarsasag.h"
 #include "Jegy.h"
 #include "Menu.h"

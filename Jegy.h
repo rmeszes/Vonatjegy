@@ -4,7 +4,7 @@
 #include <iostream>
 
 #include "memtrace.h"
-#include "string.h"
+#include "string5.h"
 
 /// <summary>
 /// Heterogén kollekció ősosztálya, a különböző jegytípusok gyűjtésére és kompatibilitásának megoldására

@@ -2,7 +2,7 @@
 #define TARSASAG_H
 
 #include "memtrace.h"
-#include "string.h"
+#include "string5.h"
 #include "Vonat.h"
 #include "Jegy.h"
 

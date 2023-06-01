@@ -7,7 +7,7 @@
 #include "memtrace.h"
 
 #include "List.hpp"
-#include "string.h"
+#include "string5.h"
 
 /// <summary>
 /// Egy osztály a konzolos menü kezelésére

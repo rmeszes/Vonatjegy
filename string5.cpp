@@ -7,7 +7,7 @@
 #include <cstring>              // Sztringműveletekhez
 #include <cstddef>
 
-#include "string.h"
+#include "string5.h"
 
 size_t String::size() const { return len; }
 

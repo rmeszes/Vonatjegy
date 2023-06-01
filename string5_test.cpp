@@ -15,7 +15,7 @@
 #define ELKESZULT 11
 #include "memtrace.h"     // a standard header-ek után kell lennie
 #include "gtest_lite.h"
-#include "string.h"
+#include "string5.h"
 
 using std::cout;
 using std::cin;
